@@ -2,35 +2,14 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
 }
 
 body {
     height: 100vh;
     width: 100%;
     overflow-x: hidden;
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* =====================================================================   SIGNUP PAGE STYLING   ===================================================================== */
 
@@ -64,7 +43,6 @@ body {
     width: 20%;
 }
 
-
 .signup-pg {
     display: flex;
     flex-direction: column;
@@ -82,7 +60,6 @@ h1 {
     margin-bottom: 30px;
 }
 
-
 .input-grp {
     margin-bottom: 15px;
 }
@@ -93,8 +70,6 @@ h1 {
     font-size: 14px;
     margin-bottom: 8px;
     display: block;
-
-
 }
 
 .input-grp input[type="text"],
@@ -107,7 +82,6 @@ h1 {
     background-color: #f8f9fa;
     border-radius: 8px;
     font-size: 14px;
-    /* outline: none; */
     transition: border-color 0.3s;
 }
 
@@ -118,7 +92,6 @@ h1 {
 .input-grp input:focus {
     border-color: #003b46;
 }
-
 
 .password-input {
     position: relative;
@@ -132,9 +105,6 @@ h1 {
     transform: translateY(-50%);
     cursor: pointer;
 }
-
-
-
 
 .btn-signup {
     background-color: #003b46;
@@ -153,7 +123,6 @@ h1 {
 .btn-signup:hover {
     background-color: #002a33;
 }
-
 
 .divider {
     text-align: center;
@@ -186,7 +155,6 @@ h1 {
     font-size: 14px;
 }
 
-
 .social-buttons {
     display: flex;
     gap: 20px;
@@ -213,7 +181,6 @@ h1 {
     background-color: #f8f9fa;
 }
 
-
 .login-link {
     text-align: center;
     font-size: 14px;
@@ -228,7 +195,6 @@ h1 {
 
 /* ================= Responsive Adjustments ================= */
 @media (max-width: 992px) {
-
     .main-container {
         flex-direction: column;
         height: auto;
@@ -251,7 +217,6 @@ h1 {
         width: 90%;
         position: relative;
     }
-
 }
 
 @media (max-width: 630px) {
@@ -260,7 +225,6 @@ h1 {
     }
 }
 
-
 /* Swal Customization */
 
 .glass-alert {
@@ -268,29 +232,8 @@ h1 {
     border-radius: 20px;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* =====================================================================   DASHBOARD PAGE STYLING   ===================================================================== */
 
-/* style.css */
 :root {
     --primary: #4f46e5;
     --side-w: 260px;
@@ -302,7 +245,7 @@ h1 {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-family: "Plus Jakarta Sans", sans-serif;
 }
 
 body {
@@ -310,7 +253,6 @@ body {
     overflow-x: hidden;
 }
 
-/* --- SIDEBAR (Desktop) --- */
 .sidebar-nav {
     width: var(--side-w);
     background: white;
@@ -380,7 +322,6 @@ body {
     gap: 10px;
 }
 
-/* --- MAIN CONTENT --- */
 .page-content {
     margin-left: var(--side-w);
     padding: 40px;
@@ -395,7 +336,6 @@ body {
     background-color: #fcfcfde1;
     padding-bottom: 30px;
     padding-top: 30px;
-    
 }
 
 .section-title h1 {
@@ -414,17 +354,21 @@ body {
     gap: 40px;
     align-items: start;
     position: sticky;
-    top: 40px;  
+    top: 40px;
 }
 
-/* Form Card */
 .card-form {
     background: white;
     padding: 30px;
     border-radius: 24px;
     border: 1px solid var(--border-color);
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-    position: static;
+}
+
+#card-form {
+    position: sticky;
+    top: 20%;
+    bottom: 0%;
 }
 
 .card-h {
@@ -505,6 +449,12 @@ input[type="color"] {
     padding: 0 15px;
     font-weight: 600;
     cursor: pointer;
+    padding: 20px;
+    transition: 0.5s ease-in-out;
+}
+
+.add-color-trigger:hover  {
+    border: 1px solid #4f46e5;
 }
 
 .publish-trigger {
@@ -525,7 +475,6 @@ input[type="color"] {
     box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.3);
 }
 
-/* --- PREVIEW CARD --- */
 .product-preview-card {
     background: white;
     border-radius: 20px;
@@ -622,10 +571,30 @@ input[type="color"] {
     display: none;
 }
 
+.color-control {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+}
+
+.color-input-field {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+}
+
+
 /* --- RESPONSIVE LOGIC --- */
-@media (max-width: 1024px) {
+@media (max-width: 1025px) {
     .main-grid {
         grid-template-columns: 1fr;
+    }
+
+    #card-form {
+        position: static;
     }
 }
 
@@ -685,3 +654,4 @@ input[type="color"] {
         display: block;
     }
 }
+

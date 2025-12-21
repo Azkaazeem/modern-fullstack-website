@@ -1,3 +1,4 @@
+// import { createElement } from "react";
 import supabase from "./config.js";
 
 
@@ -14,7 +15,7 @@ let sBtn = document.querySelector(".btn-signup");
 
 const togglePass = document.querySelector(".toggle-password")
 
-togglePass.addEventListener("click", () => {
+togglePass && togglePass.addEventListener("click", () => {
   if (sPass.type === "password") {
     sPass.type = "text"
     togglePass.classList.remove("fa-eye-slash")
@@ -206,3 +207,18 @@ sBtn && sBtn.addEventListener("click", signUp);
 
 
 // ================================================================   DashBoard Page Functionality   ================================================================
+
+const addColorBtn = document.getElementById("addColorBtn");
+const colorContainer = document.getElementById("colorContainer");
+
+addColorBtn.addEventListener("click", () => {
+    console.log("Button Clicked!");
+
+    const newColorInput = document.createElement("input");
+
+    newColorInput.type = "color";
+    newColorInput.className = "color-input-field";
+    newColorInput.value = "#000000ff";
+
+    colorContainer.insertBefore(newColorInput, addColorBtn);
+});
