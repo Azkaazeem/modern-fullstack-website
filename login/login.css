@@ -15,6 +15,19 @@ body {
     display: flex;
     height: 100vh;
     width: 100%;
+    animation: slideDown 1s ease-out forwards;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-80px) scale(1.06);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
 
 /* ================= LEFT SECTION ================= */
@@ -50,7 +63,7 @@ h1 {
     margin-bottom: 30px;
 }
 
-.input-grp{
+.input-grp {
     margin-bottom: 20px;
 }
 
@@ -90,7 +103,7 @@ h1 {
     cursor: pointer;
 }
 
-.check-remember{
+.check-remember {
     display: flex;
     justify-content: right;
     align-items: center;
@@ -203,66 +216,6 @@ h1 {
     font-weight: 600;
 }
 
-/* ================= RIGHT SECTION ================= */
-.right-section {
-    flex: 1;
-    background-color: #003b46;
-    position: relative;
-    color: white;
-    overflow: hidden;
-}
-
-.text-img {
-    padding: 60px;
-    position: relative;
-    z-index: 10;
-    height: 100%;
-}
-
-.right-section h2 {
-    font-size: 28px;
-    font-weight: 600;
-    margin-bottom: 15px;
-    margin-top: 80px;
-}
-
-.right-section p {
-    font-size: 16px;
-    line-height: 1.6;
-    opacity: 0.9;
-    max-width: 400px;
-}
-
-.hero-image {
-    position: absolute;
-    bottom: -10px;
-    right: -0px;
-    height: auto;
-    border-top-left-radius: 20px;
-}
-
-.bg-pattern {
-    position: absolute;
-    background-color: rgba(255, 255, 255, 0.05);
-    border-radius: 15px;
-    transform: rotate(15deg);
-}
-
-.sq-1 {
-    width: 150px;
-    height: 150px;
-    top: 10%;
-    right: 10%;
-}
-
-.sq-2 {
-    width: 80px;
-    height: 80px;
-    top: 30%;
-    right: 25%;
-}
-           
-
 /* ================= Responsive Adjustments ================= */
 
 @media (max-height: 1372px) {
@@ -331,11 +284,11 @@ h1 {
 
 
 
-  /* Swal Customization */
- 
+/* Swal Customization */
+
 .glass-alert {
-  backdrop-filter: blur(12px);
-  border-radius: 20px;
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
 }
 
 
@@ -357,7 +310,7 @@ h1 {
     background: white;
     padding: 35px 40px;
     border-radius: 12px;
-    box-shadow: 0 4px 25px rgba(0,0,0,0.08);
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
     text-align: center;
     animation: slideDown 1s ease-out forwards;
 }
@@ -367,6 +320,7 @@ h1 {
         opacity: 0;
         transform: translateY(-80px) scale(1.06);
     }
+
     to {
         opacity: 1;
         transform: translateY(0) scale(1);

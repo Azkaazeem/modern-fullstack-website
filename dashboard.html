@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-comm Admin Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <input type="checkbox" id="menu-toggle" hidden>
+
+    <header class="mobile-top-nav">
+        <label for="menu-toggle" class="hamburger-btn">
+            <i class="fas fa-bars"></i>
+        </label>
+        <div class="m-logo">ADMIN PANEL</div>
+        <div class="m-user"><i class="fas fa-user-circle"></i></div>
+    </header>
+
+    <div class="dashboard-wrapper">
+        <aside class="sidebar-nav">
+            <div class="brand-area">
+                <i class="fas fa-shopping-bag"></i>
+                <span>Admin Store</span>
+            </div>
+
+            <nav class="links">
+                <a href="#" class="link-item active"><i class="fas fa-plus-circle"></i> <span>Add Product</span></a>
+                <a href="#" class="link-item"><i class="fas fa-box"></i> <span>Products List</span></a>
+                <a href="#" class="link-item"><i class="fas fa-shopping-cart"></i> <span>Orders</span></a>
+                <a href="#" class="link-item"><i class="fas fa-chart-line"></i> <span>Analytics</span></a>
+            </nav>
+
+            <div class="sidebar-bottom">
+                <button class="btn-logout">
+                    <i class="fas fa-sign-out-alt"></i> <span>Logout</span>
+                </button>
+            </div>
+        </aside>
+
+        <main class="page-content">
+            <header class="section-title">
+                <h1>Product Management</h1>
+                <p>Create and preview your product listings</p>
+            </header>
+
+            <div class="main-grid">
+                <div class="card-form">
+                    <h3 class="card-h">New Product Details</h3>
+
+                    <div class="field-box">
+                        <label>Product Image</label>
+                        <label for="prodImg">
+                            <div class="upload-zone">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <span>Click to select image</span>
+                                <input type="file" id="prodImg" hidden>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div class="field-box">
+                        <label>Product Title</label>
+                        <input type="text" placeholder="Enter title...">
+                    </div>
+
+                    <div class="field-box">
+                        <label>Description</label>
+                        <textarea rows="3" placeholder="Enter product description..."></textarea>
+                    </div>
+
+                    <div class="field-box">
+                        <label>Available Colors</label>
+                        <div class="color-control">
+                            <input type="color" id="colorInput" value="#4f46e5">
+                            <button type="button" class="add-color-trigger">Add Color</button>
+                        </div>
+                    </div>
+
+                    <button class="publish-trigger">Publish to Store</button>
+                </div>
+
+                <div class="card-preview-area">
+                    <h3 class="card-h">Live Preview Card</h3>
+                    <div class="product-preview-card">
+                        <div class="p-visual">
+                            <span>Preview Image</span>
+                            <div class="p-admin-tools">
+                                <button class="edit-tool"><i class="fas fa-edit"></i></button>
+                                <button class="del-tool"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                        <div class="p-details">
+                            <span class="p-tag">NEW ARRIVAL</span>
+                            <h4>Silk Scarf Premium</h4>
+                            <p>This is how the text will display on your store.</p>
+                            <div class="p-swatches">
+                                <span style="background: #4f46e5;"></span>
+                                <span style="background: #10b981;"></span>
+                            </div>
+                            <div class="p-footer-status">Status: <b>Active</b></div>
+                        </div>
+                    </div>
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repudiandae fugit quos modi, molestias odit veniam sequi, ipsam ipsa aliquid, magni id sunt aliquam repellat hic recusandae itaque ex voluptate quas eligendi vitae fuga dolore nostrum. Quod esse veniam impedit ab voluptates, ad facilis, incidunt doloribus repellat hic delectus sequi possimus quam officiis earum architecto quas velit, omnis aspernatur error asperiores quibusdam? Autem perferendis ex vel animi soluta dolore officiis inventore neque dolores optio dignissimos, veniam, nisi excepturi deserunt. Voluptatum ad repudiandae magni voluptate laudantium deleniti quasi distinctio temporibus, soluta, dolorum officia, aut maiores mollitia assumenda quas ullam molestias reiciendis cum minima qui? Aliquid voluptatibus facere voluptatum eligendi officiis provident in illo ex, nam laborum. Accusamus tempore dignissimos, ex iusto magnam illum nostrum, itaque id necessitatibus quam consequuntur placeat voluptatibus eaque obcaecati, nemo dolorem a distinctio quasi! Animi similique quaerat vitae illum nisi, officiis, ducimus, minus tempore aut atque repudiandae sed! Saepe quasi, aspernatur aliquam pariatur voluptates blanditiis, eos iste sint laboriosam enim omnis facere minima aliquid nobis maxime ullam consequuntur. Eaque ratione aperiam incidunt delectus qui? Maxime, quod laborum quam possimus corporis, quasi dolorum earum aliquid quo a autem? Culpa magnam ad deserunt voluptas delectus expedita accusamus vero a perferendis placeat ipsa similique voluptate, officiis perspiciatis? Sint minima fugit labore reiciendis? Suscipit, vero, unde, quisquam eum nemo cupiditate voluptatem quo illo atque pariatur et? Non laudantium fugit autem officia, iure ipsa consectetur optio, amet ducimus quibusdam eligendi ab molestiae perspiciatis exercitationem, cum cupiditate. Eum perspiciatis deserunt unde libero, autem voluptatum repellendus temporibus adipisci aperiam molestias veniam quos qui laudantium ad corporis nesciunt? Iste, nam quia. Amet explicabo nostrum voluptatibus? Tempora veniam corrupti illum aut laborum non reiciendis repellat quisquam tempore nisi dicta quia alias iusto ex ratione, eius exercitationem iste accusamus dolore? Possimus nostrum id quidem numquam hic quo impedit, debitis architecto? Distinctio, amet commodi sed alias magni aperiam officia cum similique vitae aliquid debitis dolorum, eum voluptas. Sapiente aspernatur aliquid aut eaque molestias explicabo culpa. Commodi nam ut fuga aperiam, maxime rerum inventore nisi quas, ipsam repellat similique vero velit! Magnam, mollitia beatae officia eius deserunt minima a quos consectetur nemo quas. Ullam odio recusandae porro, quisquam, voluptate at veniam laudantium earum tempore, itaque nemo quas harum animi vel reprehenderit quaerat nulla rerum praesentium. Dolor impedit a beatae exercitationem, fugiat deleniti soluta aliquam suscipit adipisci ipsa magni vero libero sequi repellendus! Nisi sunt mollitia sint incidunt repellendus perspiciatis veritatis eum, laborum exercitationem quo hic atque veniam ducimus alias, dolorem iure aliquam enim architecto sed quas dignissimos id nihil! Eius labore molestias natus, reprehenderit excepturi itaque quisquam, alias neque enim accusamus adipisci autem odit ratione omnis voluptates iure iste. In veniam ipsam animi similique, quia est eveniet, amet id ex, nemo consectetur dolores ad ducimus sunt quis molestiae. Expedita, delectus, repellendus quam unde assumenda nam sed ea harum, et veritatis dicta? Minus modi beatae eum consequatur iusto, nobis ut quidem repellendus ipsum at, nihil mollitia atque sint quaerat esse nesciunt accusamus harum perferendis? Ea obcaecati nesciunt porro et totam assumenda enim adipisci iste magnam a, praesentium iusto fuga error possimus consequatur unde non asperiores voluptatibus alias consequuntur qui velit ipsa facilis quia? Quasi quaerat autem fuga culpa, in, modi atque quod a eum nostrum, quibusdam quae quia? Labore, quisquam. Ad possimus accusantium repellendus culpa nihil omnis accusamus at aperiam magni quod dignissimos laboriosam, ea nisi aliquam quaerat ut perspiciatis blanditiis iusto temporibus facere aut consequuntur eum? Accusantium, sint libero aliquam molestiae asperiores, iste officia tenetur assumenda in vitae cum error autem praesentium quaerat magni exercitationem omnis dolores culpa illum fuga, natus animi. Assumenda magnam itaque, officia ducimus inventore est nam iste nostrum sint veritatis recusandae blanditiis perferendis repudiandae architecto. Aut, magni vitae. Aspernatur suscipit obcaecati ad reiciendis architecto inventore aliquid optio facere distinctio possimus, error soluta nihil est quo ipsa, excepturi, culpa velit! Reiciendis similique maxime magnam quibusdam cum illum sunt a. Sed dolore placeat id dignissimos voluptates fugit assumenda esse? Non quibusdam consequatur dicta incidunt consequuntur. Doloribus praesentium incidunt ea ab laboriosam ut nulla, ullam autem eum aliquam deleniti pariatur maxime velit magni dolor iste temporibus laudantium nisi necessitatibus delectus, exercitationem nam id totam? Qui, nobis sequi in, minima sed odio quia dignissimos corrupti reprehenderit accusamus excepturi illo voluptates, natus praesentium alias libero eos aliquam ad quibusdam aut odit tenetur numquam. Reiciendis neque laboriosam ab suscipit cupiditate ut est eos officia dignissimos. Voluptatibus molestias illo minus rem eius error inventore tempore nobis, expedita iusto obcaecati consectetur adipisci est exercitationem harum nihil dolorem ipsam aperiam voluptatum earum suscipit delectus, voluptatem quia culpa. Quibusdam aliquam dolores rerum, dolore magni asperiores amet cum, facilis, corrupti nulla quas voluptate minima nihil earum atque labore. Odio distinctio repudiandae magnam cumque, consectetur unde minima debitis libero, veritatis non dignissimos fugit nemo accusamus voluptatem. Sint sed voluptate alias unde iure quidem consequatur perferendis, libero, quae impedit, voluptas consectetur temporibus veniam ut esse saepe quisquam officiis tempora illo. Incidunt facilis exercitationem inventore animi cumque, id esse? Laboriosam officia inventore hic eveniet illo qui sit quam sequi debitis! Laboriosam doloribus quasi nostrum quisquam et iste aspernatur sit quos atque ipsa, fugiat vitae. Deleniti, unde! Placeat quod aspernatur maxime consequatur tenetur praesentium officia porro, tempora amet perferendis odio adipisci sed? Repellat laboriosam tempore ut exercitationem, voluptates possimus, officiis illo temporibus atque quibusdam minima adipisci iure at iste dolores soluta error provident, laudantium doloribus ratione suscipit? Ratione reiciendis sunt modi accusamus veniam ipsam? Incidunt debitis tempora molestias hic odit, quisquam optio harum fugit natus deleniti placeat culpa nulla impedit repellat. Nihil dolores consequatur minima, magni quo, ea adipisci qui harum eius tenetur et, commodi deserunt dignissimos. Facilis voluptatibus cum laborum sapiente? Placeat sit, voluptas a, blanditiis, consectetur ratione ipsa nostrum autem libero vitae eligendi aperiam exercitationem? Veritatis, amet asperiores. Inventore rerum fugit voluptatum recusandae aliquam! Temporibus veritatis id excepturi magni aspernatur totam fuga hic obcaecati. Alias beatae magnam aliquam porro quasi eveniet blanditiis repudiandae quae exercitationem, ipsum, numquam a error modi totam dolores harum corporis amet ex dolorem est nam excepturi fugiat? Iure, veniam eum et nihil perferendis nostrum dignissimos?
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <label for="menu-toggle" class="mobile-overlay-mask"></label>
+
+</body>
+
+</html>

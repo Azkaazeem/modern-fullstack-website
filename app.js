@@ -79,7 +79,7 @@ async function signUp(e) {
 
 
 
-    const { data, error } = await supaBase.auth.signUp(
+    const { data, error } = await supabase.auth.signUp(
       {
         email: sEmail.value,
         password: sPass.value,
@@ -120,7 +120,7 @@ async function signUp(e) {
     } else {
       Swal.fire({
         title: "Signup successfully!",
-        text: "Welcome to Ticket Manager",
+        text: "Welcome to Our Platform",
         icon: "success",
         draggable: true,
         background: "#f9fbfc",
@@ -139,7 +139,7 @@ async function signUp(e) {
 
 // C: Inserting Data in table
 
-          const { error } = await supaBase
+          const { error } = await supabase
             .from("users")
             .insert({
               username: sUName.value,
@@ -149,7 +149,7 @@ async function signUp(e) {
           location.href = "home.html"
         })
       if (error) {
-        console.log(`Supabase Erorr ${error}`)
+        console.log(`supabase Erorr ${error}`)
       } else {
         alert("data insert successfully!!")
       }
@@ -182,3 +182,27 @@ async function signUp(e) {
 }
 
 sBtn && sBtn.addEventListener("click", signUp);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ================================================================   DashBoard Page Functionality   ================================================================

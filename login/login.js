@@ -1,4 +1,4 @@
-import supaBase from "../config.js";
+import supabase from "../config.js";
 
 let lEmail = document.getElementById("email");
 let lPass = document.getElementById("password");
@@ -137,14 +137,14 @@ async function login(e) {
 
     try {
 
-        const { data, error } = await supaBase.auth.signInWithPassword({
+        const { data, error } = await supabase.auth.signInWithPassword({
             email: email,
             password: pass
         });
 
 
         if (error) {
-            console.log("Supabase Error: ", error);
+            console.log("supabase Error: ", error);
 
 
             if (error.message.includes("Invalid login credentials")) {
@@ -265,13 +265,13 @@ async function reset(e) {
     try {
 
 
-        const { data, error } = await supaBase.auth.resetPasswordForEmail(resEmail.value, {
+        const { data, error } = await supabase.auth.resetPasswordForEmail(resEmail.value, {
             redirectTo: "https://azkaazeem.github.io/Login-page---Update-Password-page"
 
         });
 
         if (error) {
-            console.log('Supabase Error:' + ' ' + error.message);
+            console.log('supabase Error:' + ' ' + error.message);
             Swal.fire({
                 title: "Error!",
                 text: error.message,
@@ -399,7 +399,7 @@ async function newPass(e) {
 
     try {
 
-        const { data, error } = await supaBase.auth.updateUser({
+        const { data, error } = await supabase.auth.updateUser({
             password: newPassInp.value
         });
 
