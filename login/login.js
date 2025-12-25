@@ -1,4 +1,4 @@
-import supabase from "../config.js";
+import supabase from "../JavaScript Files/config.js";
 
 let lEmail = document.getElementById("email");
 let lPass = document.getElementById("password");
@@ -40,8 +40,8 @@ async function login(e) {
             title: "Please enter your email address.",
             icon: "warning",
             background: "#f9fbfc",
-            color: "#003b46",
-            confirmButtonColor: "#003b46",
+            color: "#4f46e5",
+            confirmButtonColor: "#4f46e5",
             confirmButtonText: "OK",
             padding: "20px",
             borderRadius: "15px",
@@ -58,8 +58,8 @@ async function login(e) {
             text: "Example: yourname@gmail.com",
             icon: "warning",
             background: "#f9fbfc",
-            color: "#003b46",
-            confirmButtonColor: "#003b46",
+            color: "#4f46e5",
+            confirmButtonColor: "#4f46e5",
             confirmButtonText: "OK",
             padding: "20px",
             borderRadius: "15px",
@@ -79,8 +79,8 @@ async function login(e) {
             text: "Please enter your password.",
             icon: "warning",
             background: "#f9fbfc",
-            color: "#003b46",
-            confirmButtonColor: "#003b46",
+            color: "#4f46e5",
+            confirmButtonColor: "#4f46e5",
             confirmButtonText: "OK",
             padding: "20px",
             borderRadius: "15px",
@@ -97,8 +97,8 @@ async function login(e) {
             text: "Password must be at least 6 characters long.",
             icon: "warning",
             background: "#f9fbfc",
-            color: "#003b46",
-            confirmButtonColor: "#003b46",
+            color: "#4f46e5",
+            confirmButtonColor: "#4f46e5",
             confirmButtonText: "OK",
             padding: "20px",
             borderRadius: "15px",
@@ -111,14 +111,14 @@ async function login(e) {
         return;
     }
 
-    if (email === "admin@gmail.com" && pass === "admin12345") {
+    if (email === "azkaazeem804@gmail.com" && pass === "admin12345") {
 
         Swal.fire({
             title: "Admin logged in Successfully!",
             icon: "success",
             background: "#f9fbfc",
-            color: "#003b46",
-            confirmButtonColor: "#003b46",
+            color: "#4f46e5",
+            confirmButtonColor: "#4f46e5",
             confirmButtonText: "Go to DashBoard..",
             padding: "20px",
             borderRadius: "15px",
@@ -153,8 +153,8 @@ async function login(e) {
                     text: "Incorrect Email or Password. Please try again.",
                     icon: "error",
                     background: "#f9fbfc",
-                    color: "#003b46",
-                    confirmButtonColor: "#003b46",
+                    color: "#4f46e5",
+                    confirmButtonColor: "#4f46e5",
                     confirmButtonText: "Try Again!",
                     padding: "20px",
                     customClass: {
@@ -172,8 +172,8 @@ async function login(e) {
                     text: error.message,
                     icon: "error",
                     background: "#f9fbfc",
-                    color: "#003b46",
-                    confirmButtonColor: "#003b46",
+                    color: "#4f46e5",
+                    confirmButtonColor: "#4f46e5",
                     confirmButtonText: "Try Again!",
                     padding: "20px",
                     customClass: {
@@ -193,8 +193,8 @@ async function login(e) {
             title: "Successfully logged in!",
             icon: "success",
             background: "#f9fbfc",
-            color: "#003b46",
-            confirmButtonColor: "#003b46",
+            color: "#4f46e5",
+            confirmButtonColor: "#4f46e5",
             confirmButtonText: "Go to Home",
             padding: "20px",
             customClass: {
@@ -213,8 +213,8 @@ async function login(e) {
             html: `Something went wrong internally!<br></br> <b> ${(err.message) || "Unknown error"}</b>`,
             icon: "error",
             background: "#f9fbfc",
-            color: "#003b46",
-            confirmButtonColor: "#003b46",
+            color: "#4f46e5",
+            confirmButtonColor: "#4f46e5",
             confirmButtonText: "Report issue",
             padding: "20px",
             borderRadius: "15px",
@@ -250,8 +250,8 @@ async function reset(e) {
             text: "Please Enter your Email.",
             icon: "warning",
             background: "#f9fbfc",
-            color: "#003b46",
-            confirmButtonColor: "#003b46",
+            color: "#4f46e5",
+            confirmButtonColor: "#4f46e5",
             confirmButtonText: "OK",
             padding: "20px",
             borderRadius: "15px",
@@ -278,8 +278,8 @@ async function reset(e) {
                 icon: "error",
                 draggable: true,
                 background: "#f9fbfc",
-                color: "#003b46",
-                confirmButtonColor: "#003b46",
+                color: "#4f46e5",
+                confirmButtonColor: "#4f46e5",
                 confirmButtonText: "OK",
                 padding: "20px",
                 borderRadius: "15px",
@@ -302,7 +302,7 @@ async function reset(e) {
                 // timer: 3000,
                 showConfirmButton: false,
                 background: "#f9fbfc",
-                color: "#003b46",
+                color: "#4f46e5",
                 padding: "20px",
                 borderRadius: "15px",
                 customClass: {
@@ -319,8 +319,8 @@ async function reset(e) {
             html: `Something went wrong internally! <br></br> <b>${err.message || "Unknown error"}</b>`,
             icon: "error",
             background: "#f9fbfc",
-            color: "#003b46",
-            confirmButtonColor: "#003b46",
+            color: "#4f46e5",
+            confirmButtonColor: "#4f46e5",
             confirmButtonText: "Report issue",
             padding: "20px",
             borderRadius: "15px",
@@ -361,8 +361,8 @@ async function newPass(e) {
             text: "Please Enter New password and Confirm password.",
             icon: "warning",
             background: "#f9fbfc",
-            color: "#003b46",
-            confirmButtonColor: "#003b46",
+            color: "#4f46e5",
+            confirmButtonColor: "#4f46e5",
             confirmButtonText: "OK",
             padding: "20px",
             borderRadius: "15px",
@@ -383,8 +383,8 @@ async function newPass(e) {
             text: "The New Password and Confirm Password fields must be identical..",
             icon: "warning",
             background: "#f9fbfc",
-            color: "#003b46",
-            confirmButtonColor: "#003b46",
+            color: "#4f46e5",
+            confirmButtonColor: "#4f46e5",
             confirmButtonText: "OK",
             padding: "20px",
             borderRadius: "15px",
@@ -411,8 +411,8 @@ async function newPass(e) {
                 icon: "error",
                 draggable: true,
                 background: "#f9fbfc",
-                color: "#003b46",
-                confirmButtonColor: "#003b46",
+                color: "#4f46e5",
+                confirmButtonColor: "#4f46e5",
                 confirmButtonText: "OK",
                 padding: "20px",
                 borderRadius: "15px",
@@ -434,7 +434,7 @@ async function newPass(e) {
                 timer: 3000,
                 showConfirmButton: false,
                 background: "#f9fbfc",
-                color: "#003b46",
+                color: "#4f46e5",
                 padding: "20px",
                 borderRadius: "15px",
                 customClass: {
@@ -454,8 +454,8 @@ async function newPass(e) {
             html: `Something went wrong internally! <br></br> <b>${err.message || "Unknown error"}</b>`,
             icon: "error",
             background: "#f9fbfc",
-            color: "#003b46",
-            confirmButtonColor: "#003b46",
+            color: "#4f46e5",
+            confirmButtonColor: "#4f46e5",
             confirmButtonText: "Report issue",
             padding: "20px",
             borderRadius: "15px",
@@ -500,3 +500,36 @@ toggles.forEach(toggle => {
 }
 
 )
+
+// --- OAuth Functions ---
+
+// async function signInWithGoogle() {
+//     const { error } = await supabase.auth.signInWithOAuth({
+//         provider: 'google',
+//         options: {
+//             redirectTo: window.location.origin + '/home.html',
+//         },
+//     });
+//     if (error) console.error("Google Login Error:", error.message);
+// }
+
+// async function signInWithGithub() {
+//     const { error } = await supabase.auth.signInWithOAuth({
+//         provider: 'github',
+//         options: {
+//             redirectTo: window.location.origin + '/home.html',
+//         },
+//     });
+//     if (error) console.error("Github Login Error:", error.message);
+// }
+
+// const googleLoginBtn = document.querySelector(".btn-social.google");
+// const githubLoginBtn = document.querySelector(".btn-social.github");
+
+// if (googleLoginBtn) {
+//     googleLoginBtn.addEventListener("click", signInWithGoogle);
+// }
+
+// if (githubLoginBtn) {
+//     githubLoginBtn.addEventListener("click", signInWithGithub);
+// }
