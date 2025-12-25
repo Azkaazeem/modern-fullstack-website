@@ -734,7 +734,6 @@ input[type="color"] {
 }
 
 
-
 .color-input-field {
     width: 40px;
     height: 40px;
@@ -853,27 +852,11 @@ input[type="color"] {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* Product Grid Setup */
 #product-card-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 25px;
-    align-items: stretch; /* Ye ensures karta hai ke line ke saare cards barabar height ke hon */
+    align-items: stretch;
 }
 
 .product-preview-card {
@@ -883,26 +866,24 @@ input[type="color"] {
     overflow: hidden;
     box-shadow: var(--shadow);
     display: flex;
-    flex-direction: column; /* Content ko vertical flow mein rakhta hai */
-    height: 100%; /* Column height fill karne ke liye */
+    flex-direction: column;
+    height: 100%; 
 }
 
-/* Image section ko fix rakhne ke liye */
 .p-visual {
     width: 100%;
-    height: 250px; /* Image ki height fix rahegi */
+    height: 250px;
     background: #f1f5f9;
     position: relative;
-    flex-shrink: 0; /* Image container ko chota hone se rokta hai */
+    flex-shrink: 0;
 }
 
 .p-visual img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Image stretch nahi hogi, crop hogi perfect fit ke liye */
+    object-fit: cover;
 }
 
-/* Content Area */
 .p-details {
     padding: 20px;
     display: flex;
@@ -914,7 +895,7 @@ input[type="color"] {
     margin-bottom: 10px;
     font-size: 1.2rem;
     color: #0f172a;
-    word-wrap: break-word; /* Bada word ho to line break kar dega */
+    word-wrap: break-word;
     overflow-wrap: break-word;
 }
 
@@ -924,16 +905,14 @@ input[type="color"] {
     line-height: 1.5;
     margin-bottom: 15px;
     word-wrap: break-word;
-    /* Agar aap chahti hain ke description 3 lines ke baad "..." dikhaye: */
     display: -webkit-box;
-    -webkit-line-clamp: 1;
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
 
-/* Footer elements ko niche push karne ke liye */
 .p-swatches {
-    margin-top: auto; /* Ye swatches ko details ke bilkul niche dhakel dega */
+    margin-top: auto;
     display: flex;
     gap: 8px;
     padding-bottom: 15px;
