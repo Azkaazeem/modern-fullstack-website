@@ -1,11 +1,16 @@
 import supabase from "../JavaScript Files/config.js";
 
+// ================================================================   Login Page Functionality   ================================================================
+
+    //  ---------------   A: Get Input IDs   ---------------
+
 let lEmail = document.getElementById("email");
 let lPass = document.getElementById("password");
 let lBtn = document.querySelector("#login-btn");
 
 
-//  pasword toggle button for login and forget password page
+
+//  ---------------   B: Password toggle button   ---------------
 
 const togglePass = document.querySelector(".toggle-password")
 
@@ -24,16 +29,15 @@ function toggleIcon() {
 
 togglePass && togglePass.addEventListener("click", toggleIcon)
 
-
-
-//   LOGIN FUNCTIONALTY
-
+    //  ---------------   C: Form functionality   ---------------
 
 async function login(e) {
     e.preventDefault();
 
     let email = lEmail.value.trim();
     let pass = lPass.value.trim();
+
+    //   1: fields required functionality
 
     if (!email) {
         Swal.fire({
@@ -51,6 +55,8 @@ async function login(e) {
         });
         return;
     }
+
+    //   2: Email functionality
 
     if (!email.includes("@") || !email.includes("gmail.com")) {
         Swal.fire({
@@ -73,6 +79,8 @@ async function login(e) {
         return;
     }
 
+    //   3: Password functionality
+
     if (!pass) {
         Swal.fire({
             title: "Password field is empty.",
@@ -90,6 +98,8 @@ async function login(e) {
         });
         return;
     }
+
+    //   4: Password length functionality
 
     if (pass.length < 6) {
         Swal.fire({
@@ -111,123 +121,73 @@ async function login(e) {
         return;
     }
 
-    if (email === "azkaazeem804@gmail.com" && pass === "admin12345") {
 
-        Swal.fire({
-            title: "Admin logged in Successfully!",
-            icon: "success",
-            background: "#f9fbfc",
-            color: "#4f46e5",
-            confirmButtonColor: "#4f46e5",
-            confirmButtonText: "Go to DashBoard..",
-            padding: "20px",
-            borderRadius: "15px",
-            customClass: {
-                popup: "glass-alert"
-            }
-        }).then(() => {
-            location.href = "../dashboard.html";
-        });
-
-
-
-        return;
-
-    }
+    //   5: Try Catch Block functionality
 
     try {
+        Swal.fire({
+            title: 'Logging in...',
+            didOpen: () => Swal.showLoading()
+        });
 
-        const { data, error } = await supabase.auth.signInWithPassword({
+        // 6: Save Input Value Auth Table
+
+        const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
             email: email,
             password: pass
         });
 
+        if (authError) throw authError;
 
-        if (error) {
-            console.log("supabase Error: ", error);
+        // 7: Fetch Role From Supabase
 
+        const { data: userData, error: dbError } = await supabase
+            .from('FullStack-Users')
+            .select('role')
+            .eq('email', email)
+            .single();
 
-            if (error.message.includes("Invalid login credentials")) {
-                Swal.fire({
-                    title: "Login failed!",
-                    text: "Incorrect Email or Password. Please try again.",
-                    icon: "error",
-                    background: "#f9fbfc",
-                    color: "#4f46e5",
-                    confirmButtonColor: "#4f46e5",
-                    confirmButtonText: "Try Again!",
-                    padding: "20px",
-                    customClass: {
-                        popup: "glass-alert"
-                    }
-                }).then(() => {
-                    lEmail.value = "";
-                    lPass.value = "";
-                })
-            }
-            else {
+            console.log(userData);
+            
+        if (dbError) throw dbError;
 
-                Swal.fire({
-                    title: "Error!",
-                    text: error.message,
-                    icon: "error",
-                    background: "#f9fbfc",
-                    color: "#4f46e5",
-                    confirmButtonColor: "#4f46e5",
-                    confirmButtonText: "Try Again!",
-                    padding: "20px",
-                    customClass: {
-                        popup: "glass-alert"
-                    }
-                }).then(() => {
-                    lEmail.value = "";
-                    lPass.value = "";
-                })
+        // 8: If role Equal to Admin Gona Dashboard
 
+        if (userData.role === 'admin') {
+            Swal.fire({
+                title: "Welcome Admin!",
+                text: "Redirecting to Dashboard...",
+                icon: "success",
+                confirmButtonColor: "#4f46e5"
+            }).then(() => {
+                location.href = "../dashboard.html";
+            });
 
-            }
-            return;
+        // 9: else Gona Home
+
+        } else {
+            Swal.fire({
+                title: "Login Success!",
+                text: "Redirecting to Home...",
+                icon: "success",
+                confirmButtonColor: "#4f46e5"
+            }).then(() => {
+                location.href = "../home.html";
+            });
         }
 
-        Swal.fire({
-            title: "Successfully logged in!",
-            icon: "success",
-            background: "#f9fbfc",
-            color: "#4f46e5",
-            confirmButtonColor: "#4f46e5",
-            confirmButtonText: "Go to Home",
-            padding: "20px",
-            customClass: {
-                popup: "glass-alert"
-            }
-        }).then(() => {
-            location.href = "../home.html";
-        });
-
-
+    //  ---------------   D: System Error Swal   ---------------
 
     } catch (err) {
-        console.log(err);
+        console.error("Login Error:", err);
         Swal.fire({
-            title: "System error!",
-            html: `Something went wrong internally!<br></br> <b> ${(err.message) || "Unknown error"}</b>`,
+            title: "Login Failed",
+            text: err.message || "Invalid credentials",
             icon: "error",
-            background: "#f9fbfc",
-            color: "#4f46e5",
-            confirmButtonColor: "#4f46e5",
-            confirmButtonText: "Report issue",
-            padding: "20px",
-            borderRadius: "15px",
-            customClass: {
-                popup: "glass-alert"
-            }
-        }).then(() => {
-            lEmail.value = "";
-            lPass.value = "";
-        })
+            confirmButtonColor: "#4f46e5"
+        });
     }
 }
-
 
 lBtn && lBtn.addEventListener("click", login);
 
@@ -477,7 +437,7 @@ ubdBtn && ubdBtn.addEventListener("click", newPass)
 
 let toggles = document.querySelectorAll(".toggle-password");
 
-toggles.forEach(toggle => {
+toggles && toggles.forEach(toggle => {
 
     function toggIcon() {
         let id = toggle.getAttribute("data-target");

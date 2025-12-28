@@ -43,6 +43,9 @@ async function signUp(e) {
     e.preventDefault();
     console.log("Function Work Best!");
 
+
+    //   1: fields required functionality
+
     if (!sUName.value.trim() || !sEmail.value.trim() || !sPass.value.trim() || !sPhn.value.trim()) {
         Swal.fire({
             title: "All fields required!",
@@ -60,6 +63,8 @@ async function signUp(e) {
         });
         return
     };
+
+    //   2: Phone No Length functionality
 
     if (sPhn.value.length !== 11) {
         Swal.fire({
@@ -80,6 +85,8 @@ async function signUp(e) {
         return;
     }
 
+    //   3: Password length functionality
+
     if (sPass.length < "6") {
         Swal.fire({
             title: "Incorrect Phone Number!",
@@ -99,6 +106,8 @@ async function signUp(e) {
         return;
     }
 
+    //   4: Email functionality
+
     if (!sEmail.value.includes("@") || !sEmail.value.includes("gmail.com")) {
         Swal.fire({
             title: "Please enter a valid Gmail address.",
@@ -114,13 +123,17 @@ async function signUp(e) {
                 popup: "glass-alert"
             }
         }).then(() => {
-            lEmail.value = "";
-            lPass.value = "";
+            sEmail.value = "";
+            sPass.value = "";
         })
         return;
     }
 
+    //   5: Try Catch Block functionality
+
     try {
+
+    //   6: Fetch Data from Supabase functionality
 
         const { data, error } = await supabase.auth.signUp(
             {
@@ -134,7 +147,9 @@ async function signUp(e) {
                 }
             }
         )
-        // console.log(data);
+        console.log(data);
+
+    //   7: If Error Display functionality
 
         if (error) {
             console.log(error);
@@ -160,6 +175,8 @@ async function signUp(e) {
 
             })
             return;
+
+    //   8: Else Data SuccessFul Store functionality
 
         } else {
             Swal.fire({
@@ -194,9 +211,9 @@ async function signUp(e) {
                 })
 
             if (error) {
-                console.log(`supabase error ${error}`)
+                console.log(`supabase error ${error}`) // If Error In Inserting Data
             } else {
-                console.log("data insert successfully!!")
+                console.log("data insert successfully!!") // Else Data Insert In supabase Table
             }
         }
 
