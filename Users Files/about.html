@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us | Luxora</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+  <link rel="stylesheet" href="user.css">
+  <link rel="shortcut icon" href="../Images/logo.png" type="image/x-icon">
+</head>
+<body>
+
+    <nav class="nav">
+        <div class="nav-wrap">
+            <input type="checkbox" id="menu-toggle" hidden>
+
+            <label for="menu-toggle" class="hamburger">
+                <i class="fa-solid fa-bars-staggered"></i>
+            </label>
+
+            <div class="brand">Luxora</div>
+
+            <div class="nav-links">
+                <label for="menu-toggle" class="close-drawer">
+                    <i class="fa-solid fa-xmark"></i>
+                </label>
+
+                <div class="drawer-header">
+                    <div class="user-avatar"><i class="fa-solid fa-circle-user"></i></div>
+                    <div class="user-info">
+                        <span>Welcome back,</span>
+                    </div>
+                </div>
+
+                <ul class="menu-list">
+                    <li><a href="home.html"><i class="fa-solid fa-house"></i> Home</a></li>
+                    <li><a href="products.html"><i class="fa-solid fa-bag-shopping"></i> Shop All</a></li>
+                    <li><a href="#"><i class="fa-solid fa-bolt"></i> New Arrivals</a></li>
+                    <li><a href="#"><i class="fa-solid fa-heart"></i> Wishlist</a></li>
+                    <hr class="mobile-only">
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact & Support</a></li>
+                </ul>
+
+                <div class="drawer-footer mobile-only">
+                    <p>Follow Luxora</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+                        <a href="#"><i class="fa-brands fa-pinterest-p"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="user-action">
+                <button id="LogoutBtn" title="Logout">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <label for="menu-toggle" class="nav-overlay"></label>
+
+  <div class="container">
+
+    <!-- Introduction -->
+    <section class="fade-in">
+      <h2>About Luxora</h2>
+      <p>Luxora is a modern e-commerce platform created to deliver premium products for contemporary lifestyles. We believe that great design and reliable quality should go hand in hand, which is why every product is selected with attention to detail and usability.</p>
+      <p>Our platform offers a curated collection of products designed to bring style, comfort, and convenience directly to our customers.</p>
+    </section>
+
+    <!-- Mission & Vision -->
+    <section class="fade-in">
+      <h2>Our Mission & Vision</h2>
+      <div class="mission-vision">
+        <div>
+          <h3>Mission</h3>
+          <p>Our mission is to provide customers with thoughtfully curated products that combine style, comfort, and durability. We aim to make online shopping simple, secure, and enjoyable through a clean interface and smooth user experience.</p>
+        </div>
+        <div>
+          <h3>Vision</h3>
+          <p>We envision Luxora as a trusted digital marketplace that sets a standard for quality, design, and customer satisfaction in the modern retail space.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- What Makes Us Different -->
+    <section class="fade-in">
+      <h2>What Sets Us Apart</h2>
+      <div class="features">
+        <div class="feature-card">High-quality carefully selected products</div>
+        <div class="feature-card">Modern and user-friendly design</div>
+        <div class="feature-card">Customer trust and transparency</div>
+        <div class="feature-card">Continuous improvement through technology</div>
+      </div>
+    </section>
+
+    <!-- Founder / Developer -->
+    <section class="fade-in">
+      <h2>Founder & Developer</h2>
+      <div class="founder">
+        <img src="../Images/pic.jpeg" alt="Founder Photo">
+        <div class="founder-info">
+          <h3>Azka</h3>
+          <p>Full Stack Web Developer & Graphic Designer</p>
+          <p>Luxora was designed and developed by Azka with a strong focus on clean design, efficient functionality, and a professional user experience.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Values / Promise -->
+    <section class="fade-in">
+      <h2>Our Commitment</h2>
+      <div class="values">
+        <div class="value-card">Customer Focus</div>
+        <div class="value-card">Transparency</div>
+        <div class="value-card">Reliability</div>
+      </div>
+    </section>
+
+  </div>
+
+      <script type="module" src="./user.js"></script>
+    <script type="module" src="../JavaScript Files/config.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+</html>

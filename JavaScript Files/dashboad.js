@@ -33,40 +33,31 @@ LogoutBtn && LogoutBtn.addEventListener("click", logout)
 // B: Is User Authenticated Or not?
 
 async function protectDashboard() {
+  // 1. Check karein session hai ya nahi
+  const { data: { user }, error: authError } = await supabase.auth.getUser();
 
-    const { data: { user }, error: authError } = await supabase.auth.getUser();
+  if (authError || !user) {
+    console.log("Session missing, redirecting...");
+    window.location.href = "./login/login.html";
+    return;
+  }
 
-    if (authError || !user) {
-        console.log("User not logged in");
-        window.location.href = "./login/login.html"; 
-        return;
-    }
+  // 2. Query karein (Small letters aur email filter ke saath)
+  const { data: userData, error: dbError } = await supabase
+    .from('FullStack-Users')
+    .select('role, email') // Casing check: 'role' not 'Role'
+    .eq('email', user.email) // Type mismatch se bachne ke liye email use karein
+    .single();
 
-    // 1: Fetch Data from Table
+  if (dbError) {
+    console.error("fetch.ts error ki wajah:", dbError.message);
+    return;
+  }
 
-    const { data: userData, error: dbError } = await supabase
-        .from('FullStack-Users')
-        .select('role, email')
-        .eq('id', user.id) 
-        .single();
-
-    // 2: If Error is show
-
-    if (dbError) {
-        // console.error("Database fetch error:", dbError.message);
-        return;
-    }
-
-    console.log("Database User Data:", userData);
-
-    // 3: If Admin not Gona home.html page
-
-    if (userData.role !== 'admin') {
-        alert("Access Denied! Admins only.");
-        window.location.href = "./home.html";
-    } else {
-        console.log("Welcome Admin! Access granted.");
-    }
+  // Admin check
+  if (userData.role !== 'admin') {
+    window.location.href = "../Users Files/home.html";
+  }
 }
 
 protectDashboard();
@@ -102,9 +93,9 @@ fileInput && fileInput.addEventListener("click", displayName)
 async function UploadFile() {
 
   const { data: { user } } = await supabase.auth.getUser();
-if (!user) {
+  if (!user) {
     return Swal.fire("Error", "Please login first!", "error");
-}
+  }
 
   const file = fileInput.files[0];
   const prodTitle = document.getElementById("prodTitle").value.trim();
@@ -116,8 +107,10 @@ if (!user) {
   const colorInputs = document.querySelectorAll(".color-input-field");
   const selectedColors = Array.from(colorInputs).map(input => input.value);
   // console.log(selectedColors);
+const selectedStatus = document.querySelector(
+  'input[name="prodStatus"]:checked'
+).value;
 
-  const selectedStatus = document.querySelector('input[name="prodStatus"]').value;
   // console.log(selectedStatus);
 
 
@@ -130,12 +123,20 @@ if (!user) {
     });
   }
 
+  const { data: { dbuser } } = await supabase.auth.getUser();
+
   const { data, error } = await supabase
     .from("FullStack-Users")
     .select("role")
-    .single()
+    .eq("email", user.email)
+    .single();
 
-  console.log(data);
+  if (error) {
+    console.error(error.message);
+  }
+
+
+  console.log(dbuser);
 
 
   if (!data || data.role !== "admin") {
@@ -228,35 +229,23 @@ addColorBtn && addColorBtn.addEventListener("click", AddColorBtn)
 // ----------------------------------------------   C: FETCH FILE   ----------------------------------------------
 
 async function fetchFile() {
-    const cardContainer = document.getElementById('product-card-container');
-    if (!cardContainer) return;
+  const cardContainer = document.getElementById('product-card-container');
+  if (!cardContainer) return;
 
-    cardContainer.innerHTML = "";
+  cardContainer.innerHTML = "";
 
-    const { data: { user }, error: authError } = await supabase.auth.getUser();
+  const { data: { user }, error: authError } = await supabase.auth.getUser();
 
-    // Agar user logged in nahi hai to data fetch na karein
-    if (!user || authError) {
-        console.log("Session missing, skipping fetch.");
-        return;
-    }
+  if (!user || authError) {
+    console.log("Session missing, skipping fetch.");
+    return;
+  }
 
-    const { data, error } = await supabase
-        .from('FullStack-Images')
-        .select('*')
-        .eq('user_id', user.id); // 'user_id' check database ke mutabiq
+  const { data, error } = await supabase
+    .from('FullStack-Images')
+    .select('*')
+    .eq('user_id', user.id);
 
-// const { data: { user }, error: userErr } = await supabase.auth.getUser();
-
-// if (!user || userErr) {
-//     console.log("User not logged in or session missing");
-//     return;
-// }
-
-// const { data, error } = await supabase
-//     .from('FullStack-Images')
-//     .select('*')
-//     .eq('user_id', user.id);
   if (error) {
     console.error("Fetch error:", error.message);
     cardContainer.innerHTML = `<p style="color:white;">Error loading cardContainer: ${error.message}</p>`;
@@ -265,6 +254,11 @@ async function fetchFile() {
 
   if (data && data.length > 0) {
     data.forEach(item => {
+      console.log(item);
+
+      const statusText = item.status === "Active" ? "Active" : "Inactive";
+      const statusClass = item.status === "Active" ? "active" : "inactive";
+
       cardContainer.innerHTML += `
 <div class="col-6 col-md-4 col-lg-3 d-flex align-items-stretch"> 
     <div class="product-preview-card">
@@ -281,13 +275,13 @@ async function fetchFile() {
       
       <div class="p-details">
         <span class="p-tag">NEW ARRIVAL</span>
-        <h4>Silk Scarf Premium</h4>
-        <p>This is how the text will display on your store.</p>
+        <h4>${item.product_title}</h4>
+        <p>${item.product_description}</p>
         <div class="p-swatches">
             <span style="background: #4f46e5;"></span>
             <span style="background: #10b981;"></span>
         </div>
-        <div class="p-footer-status">Status: <b>Active</b></div>
+        <div class="p-footer-status">Status:<b class="${statusClass}">${statusText}</b></div>
       </div>
     </div>
       </div>
@@ -306,71 +300,105 @@ window.onload = fetchFile;
 
 // ----------------------------------------------   D: DELETE FILE   ----------------------------------------------
 
-// const editFileInput = document.getElementById('editFileInput');
-// let currentEditId = null;
-// let currentOldUrl = null;
+let currentOldUrl = null;
 
-// window.deleteImage = async (id, imageUrl) => {
-//     const result = await Swal.fire({
-//         title: 'Are you sure?',
-//         text: "This action will permanently delete the image.",
-//         icon: 'warning',
-//         showCancelButton: true,
-//         confirmButtonColor: '#d33',
-//         cancelButtonColor: '#3085d6',
-//         confirmButtonText: 'Yes, delete it!'
-//     });
+window.deleteImage = async (id, imageUrl) => {
+  const result = await Swal.fire({
+    title: 'Are you sure?',
+    text: "This action will permanently delete the image.",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#d33',
+    cancelButtonColor: '#3085d6',
+    confirmButtonText: 'Yes, delete it!'
+  });
 
-//     if (result.isConfirmed) {
-//         try {
-//             const fileName = imageUrl.split('/').pop(); 
-//             await supabase.storage.from('Images').remove([fileName]);
+  if (result.isConfirmed) {
+    try {
+      const fileName = imageUrl.split('/').pop();
+      await supabase.storage.from('FullStackImages').remove([fileName]);
 
-//             const { error } = await supabase.from('userImages').delete().eq('id', id);
+      const { error } = await supabase.from('FullStack-Images').delete().eq('id', id);
 
-//             if (error) throw error;
+      if (error) throw error;
 
-//             Swal.fire('Deleted!', 'The image has been removed successfully.', 'success');
-//             fetchGallery();
-//         } catch (err) {
-//             Swal.fire('Error', 'Failed to delete image: ' + err.message, 'error');
-//         }
-//     }
-// };
+      Swal.fire('Deleted!', 'The image has been removed successfully.', 'success');
+      fetchFile();
+    } catch (err) {
+      Swal.fire('Error', 'Failed to delete image: ' + err.message, 'error');
+    }
+  }
+};
 
-// // ----------------------------------------------   D: EDIT FILE   ----------------------------------------------
+// ----------------------------------------------   D: EDIT FILE   ----------------------------------------------
+let currentEditId = null;
 
-// window.startEdit = (id, url) => {
-//     currentEditId = id;
-//     currentOldUrl = url;
-//     editFileInput.click();
-// };
-// editFileInput.addEventListener('change', async () => {
-//     const newFile = editFileInput.files[0];
-//     if (!newFile) return;
+window.startEdit = async (id, oldTitle, oldDesc) => {
+  currentEditId = id;
 
-//     Swal.fire({ title: 'Updating...', didOpen: () => Swal.showLoading() });
+  // 1️⃣ Swal input modal
+  const { value: formData } = await Swal.fire({
+    title: "Edit Product",
+    html: `
+      <input id="swal-title" class="swal2-input" placeholder="Title" value="">
+      <textarea id="swal-desc" class="swal2-textarea" placeholder="Description"></textarea>
+      <input id="swal-file" type="file" class="swal2-file" accept="image/*">
+    `,
+    confirmButtonText: "Update",
+    focusConfirm: false,
+    preConfirm: () => {
+      return {
+        title: document.getElementById("swal-title").value.trim(),
+        desc: document.getElementById("swal-desc").value.trim(),
+        file: document.getElementById("swal-file").files[0]
+      };
+    }
+  });
 
-//     try {
-//         const fileName = `${Date.now()}_${newFile.name}`;
-        
-//         const { data: upData, error: upErr } = await supabase.storage
-//             .from('Images')
-//             .upload(fileName, newFile);
+  if (!formData) return;
 
-//         if (upErr) throw upErr;
+  Swal.fire({ title: "Updating...", didOpen: () => Swal.showLoading() });
 
-//         const { data: { publicUrl } } = supabase.storage.from('Images').getPublicUrl(fileName);
+  try {
+    let imageUrl = null;
+    let imageName = null;
 
-//         const { error: dbErr } = await supabase.from('userImages')
-//             .update({ image_url: publicUrl, image_name: newFile.name })
-//             .eq('id', currentEditId);
+    // 2️⃣ Image upload (optional)
+    if (formData.file) {
+      const fileName = `${Date.now()}_${formData.file.name}`;
 
-//         if (dbErr) throw dbErr;
+      await supabase.storage
+        .from("FullStackImages")
+        .upload(fileName, formData.file);
 
-//         Swal.fire('Updated!', 'Image has been replaced successfully.', 'success');
-//         fetchGallery();
-//     } catch (err) {
-//         Swal.fire('Update Failed', err.message, 'error');
-//     }
-// });
+      const { data } = supabase.storage
+        .from("FullStackImages")
+        .getPublicUrl(fileName);
+
+      imageUrl = data.publicUrl;
+      imageName = formData.file.name;
+    }
+
+    // 3️⃣ DB update
+    const updateData = {
+      product_title: formData.title,
+      product_description: formData.desc
+    };
+
+    if (imageUrl) {
+      updateData.image_url = imageUrl;
+      updateData.image_name = imageName;
+    }
+
+    await supabase
+      .from("FullStack-Images")
+      .update(updateData)
+      .eq("id", currentEditId);
+
+    Swal.fire("Updated!", "Product updated successfully", "success");
+    fetchFile();
+
+  } catch (err) {
+    Swal.fire("Error", err.message, "error");
+  }
+};

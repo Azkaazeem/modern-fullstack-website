@@ -148,6 +148,7 @@ h1 {
     right: 0;
 }
 
+
 .divider span {
     background-color: #fff;
     padding: 0 10px;
@@ -906,7 +907,7 @@ input[type="color"] {
     margin-bottom: 15px;
     word-wrap: break-word;
     display: -webkit-box;
-    -webkit-line-clamp: 3;
+    /* -webkit-line-clamp: 3; */
     -webkit-box-orient: vertical;
     overflow: hidden;
 }

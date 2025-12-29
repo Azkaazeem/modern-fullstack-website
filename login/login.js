@@ -172,7 +172,7 @@ async function login(e) {
                 icon: "success",
                 confirmButtonColor: "#4f46e5"
             }).then(() => {
-                location.href = "../home.html";
+                location.href = "../Users Files/home.html";
             });
         }
 
@@ -433,7 +433,7 @@ async function newPass(e) {
 ubdBtn && ubdBtn.addEventListener("click", newPass)
 
 
-// SHOW/HIDE PASSWORD TOGGLE  for update password
+// SHOW/HIDE PASSWORD TOGGLE  for update Password
 
 let toggles = document.querySelectorAll(".toggle-password");
 

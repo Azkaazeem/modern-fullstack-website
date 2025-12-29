@@ -23,7 +23,6 @@ let sBtn = document.querySelector(".btn-signup");
 const togglePass = document.querySelector(".toggle-password");
 // console.log(togglePass);
 
-
 togglePass && togglePass.addEventListener("click", () => {
     if (sPass.type === "password") {
         sPass.type = "text"
@@ -207,7 +206,7 @@ async function signUp(e) {
                             phone: sPhn.value,
                             role: "user"
                         })
-                    window.location.href = "../home.html"
+                    window.location.href = "../Users Files/home.html"
                 })
 
             if (error) {
