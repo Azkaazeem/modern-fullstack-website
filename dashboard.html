@@ -9,7 +9,7 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <link rel="shortcut icon" href="Images/logo.png" type="image/x-icon">
+    <link rel="shortcut icon" href="./Images/logo.png" type="image/x-icon">
 </head>
 
 <body>
@@ -28,7 +28,7 @@
         <aside class="sidebar-nav">
             <div class="brand-area">
                 <i class="fas fa-shopping-bag"></i>
-                <span>Admin Store</span>
+                <span>Luxora</span>
             </div>
 
             <nav class="links">
@@ -67,6 +67,14 @@
                             </label>
                         </div>
 
+                        <div class="input-field arrival-container">
+                            <label class="custom-checkbox">
+                                <input type="checkbox" id="arrival-check">
+                                <span class="checkmark"></span>
+                                Mark as New Arrival
+                            </label>
+                        </div>
+
                         <div class="field-box">
                             <label>Product Title</label>
                             <input type="text" placeholder="Enter title..." id="prodTitle">
@@ -75,6 +83,12 @@
                         <div class="field-box">
                             <label>Description</label>
                             <textarea rows="3" placeholder="Enter product description..." id="prodDesc"></textarea>
+                        </div>
+
+                        <div class="field-box">
+                            <label>Product Price</label>
+                            <input type="number" placeholder="Enter Product Price..." id="prodPrice">
+
                         </div>
 
                         <div class="field-box">
@@ -112,12 +126,9 @@
         </main>
     </div>
 
-            <!-- <label for="menu-toggle" class="mobile-overlay-mask"></label> -->
-
-
-            <script type="module" src="./JavaScript Files/config.js"></script>
-            <script type="module" src="./JavaScript Files/dashboad.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="module" src="./JavaScript Files/config.js"></script>
+    <script type="module" src="./JavaScript Files/dashboad.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </body>
 

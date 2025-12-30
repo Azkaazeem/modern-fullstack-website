@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,10 +9,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="user.css">
+    <link rel="stylesheet" href="../style.css">
 </head>
-
 <body>
 
+<!-- ================= NAVBAR ================= -->
     <nav class="nav">
         <div class="nav-wrap">
             <input type="checkbox" id="menu-toggle" hidden>
@@ -63,63 +63,78 @@
             </div>
         </div>
     </nav>
+<!-- =============== NAVBAR END =============== -->
 
-    <label for="menu-toggle" class="nav-overlay"></label>
 
-    <header class="hero">
-        <div class="hero-text">
-            <h1>Premium Products <br />For Modern Living</h1>
-            <p>Discover stylish, high‑quality products curated for modern lifestyles. Clean design, trusted quality.</p>
-            <a href="newproduct.html"><button class="btn">Explore Collection</button></a>
-        </div>
-        <div class="hero-card">
-            <strong>New Arrival</strong>
-            <img src="../Images/1.avif" alt="Luxora Product" />
-        </div>
-    </header>
 
-    <section class="container">
-        <h2 class="section-title">Featured Products</h2>
-        <p class="section-sub">Hand‑picked items from our latest collection</p>
-        <div class="grid" id="home-product-display">
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?q=80&w=800" />
-                <div class="card-body">
-                    <span class="tag">NEW</span>
-                    <h4>Minimal Backpack</h4>
-                    <p>Elegant design with durable build.</p>
+<main class="products-wrapper">
+
+  <!-- SECOND NAVBAR (SEARCH + SORT) -->
+  <div class="sub-navbar">
+    <div class="sub-left">
+      <h3>Products</h3>
+    </div>
+
+    <div class="sub-right">
+      <input type="text" placeholder="Search products..." />
+      <select>
+        <option>Sort by</option>
+        <option>Newest</option>
+        <option>Price: Low to High</option>
+        <option>Price: High to Low</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- MAIN LAYOUT -->
+  <div class="products-layout">
+
+    <!-- FILTER SIDEBAR -->
+    <aside class="filter-panel">
+      <h4>Filter Products</h4>
+
+      <div class="filter-group">
+        <p>Category</p>
+        <label><input type="checkbox"> Bags</label>
+        <label><input type="checkbox"> Shoes</label>
+        <label><input type="checkbox"> Accessories</label>
+      </div>
+
+      <div class="filter-group">
+        <p>Price</p>
+        <label><input type="radio" name="price"> Low to High</label>
+        <label><input type="radio" name="price"> High to Low</label>
+      </div>
+
+      <div class="filter-group">
+        <p>Status</p>
+        <label><input type="checkbox"> Active</label>
+        <label><input type="checkbox"> Inactive</label>
+      </div>
+    </aside>
+
+    <!-- PRODUCTS -->
+    <section class="products-section">
+
+      <div class="products-grid">
+
+                <div class="card-preview-area">
+                    <div id="product-card-container">
+                      
+                    </div>
                 </div>
-            </div>
-            <div class="card">
-                <img src="../Images/4.jpg" />
-                <div class="card-body">
-                    <span class="tag">TRENDING</span>
-                    <h4>Smart Watch</h4>
-                    <p>Track your lifestyle in style.</p>
-                </div>
-            </div>
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=800" />
-                <div class="card-body">
-                    <span class="tag">POPULAR</span>
-                    <h4>Running Shoes</h4>
-                    <p>Comfort meets performance.</p>
-                </div>
-            </div>
-        </div>
+
+      </div>
+
     </section>
 
-    <section class="cta">
-        <h2>Upgrade Your Style Today</h2>
-        <p>Quality products trusted by thousands of customers.</p>
-        <a href="products.html"><button class="btn">Shop Now</button></a>
-    </section>
-
-    <footer>© 2025 Luxora Store. All rights reserved.</footer>
+  </div>
+</main>
 
     <script type="module" src="./user.js"></script>
-    <script type="module" src="../JavaScript Files/config.js"></script>
     <script type="module" src="../JavaScript Files/dashboad.js"></script>
+    <script type="module" src="../JavaScript Files/config.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
 </body>
 </html>

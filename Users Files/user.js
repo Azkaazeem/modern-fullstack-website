@@ -28,3 +28,4 @@ async function logout() {
   }
 }
 LogoutBtn && LogoutBtn.addEventListener("click", logout)
+

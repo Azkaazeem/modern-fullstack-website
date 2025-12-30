@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us | Luxora</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="user.css">
+  <link rel="shortcut icon" href="../Images/logo.png" type="image/x-icon">
+</head>
+<body>
+
+    <nav class="nav">
+        <div class="nav-wrap">
+            <input type="checkbox" id="menu-toggle" hidden>
+
+            <label for="menu-toggle" class="hamburger">
+                <i class="fa-solid fa-bars-staggered"></i>
+            </label>
+
+            <div class="brand">Luxora</div>
+
+            <div class="nav-links">
+                <label for="menu-toggle" class="close-drawer">
+                    <i class="fa-solid fa-xmark"></i>
+                </label>
+
+                <div class="drawer-header">
+                    <div class="user-avatar"><i class="fa-solid fa-circle-user"></i></div>
+                    <div class="user-info">
+                        <span>Welcome back,</span>
+                    </div>
+                </div>
+
+                <ul class="menu-list">
+                    <li><a href="home.html"><i class="fa-solid fa-house"></i> Home</a></li>
+                    <li><a href="products.html"><i class="fa-solid fa-bag-shopping"></i> Shop All</a></li>
+                    <li><a href="#"><i class="fa-solid fa-bolt"></i> New Arrivals</a></li>
+                    <li><a href="#"><i class="fa-solid fa-heart"></i> Wishlist</a></li>
+                    <hr class="mobile-only">
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact & Support</a></li>
+                </ul>
+
+                <div class="drawer-footer mobile-only">
+                    <p>Follow Luxora</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+                        <a href="#"><i class="fa-brands fa-pinterest-p"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="user-action">
+                <button id="LogoutBtn" title="Logout">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <label for="menu-toggle" class="nav-overlay"></label>
+
+    <div class="container">
+        <section class="fade-in contact-header">
+            <h2>Get In Touch</h2>
+            <p>Have a question or just want to say hi? We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
+        </section>
+
+        <section class="fade-in">
+            <div class="contact-grid">
+                <a href="https://wa.me/1234567890" target="_blank" class="contact-card">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <h3>WhatsApp</h3>
+                    <p>Chat with us instantly</p>
+                    <span>+92 316 1132 149</span>
+                </a>
+
+                <a href="mailto:support@luxora.com" class="contact-card">
+                    <i class="fa-solid fa-envelope"></i>
+                    <h3>Email Us</h3>
+                    <p>We'll reply within 24 hours</p>
+                    <span>azkaazeem804@gmail.com</span>
+                </a>
+
+                <a href="https://www.google.com/maps/place/Manzoor+Colony+Awami+Chowk/@24.8521489,67.0777699,17z/data=!3m1!4b1!4m6!3m5!1s0x3eb33d9fcc9256fb:0x800089b038b2a566!8m2!3d24.8521441!4d67.0803448!16s%2Fg%2F11l229sxds?entry=ttu&g_ep=EgoyMDI1MTIwOS4wIKXMDSoASAFQAw%3D%3D" target="_blank">
+                    <div class="contact-card">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <h3>Our Office</h3>
+                    <p>Karachi, Pakistan</p>
+                    <span>Luxora HQ, Suite 104</span>
+                </div>
+                </a>
+            </div>
+        </section>
+
+        <section class="fade-in">
+            <div class="contact-wrapper">
+                <div class="form-container">
+                    <h3>Send us a Message</h3>
+                    <form id="contactForm">
+                        <div class="input-group">
+                            <input type="text" placeholder="Your Name" required>
+                            <input type="email" placeholder="Your Email" required>
+                        </div>
+                        <input type="text" placeholder="Subject" required>
+                        <textarea rows="5" placeholder="How can we help you?" required></textarea>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script type="module" src="../JavaScript Files/config.js"></script>
+    <script type="module" src="./user.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+</html>

@@ -435,6 +435,72 @@ body {
     color: #1e293b;
 }
 
+.arrival-container {
+    margin: 20px 0;
+}
+
+.custom-checkbox {
+    display: flex;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text);
+    user-select: none;
+    gap: 12px;
+}
+
+.custom-checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkmark {
+    height: 22px;
+    width: 22px;
+    background-color: #fff;
+    border: 2px solid #e2e8f0;
+    border-radius: 6px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.custom-checkbox:hover input ~ .checkmark {
+    border-color: var(--primary);
+}
+
+.custom-checkbox input:checked ~ .checkmark {
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+
+/* The actual check icon (Hidden by default) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show check icon when checked */
+.custom-checkbox input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Styling the check icon (The white tick) */
+.custom-checkbox .checkmark:after {
+    left: 7px;
+    top: 3px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2.5px 2.5px 0;
+    transform: rotate(45deg);
+}
+
 .field-box {
     margin-bottom: 20px;
 }
@@ -517,6 +583,7 @@ body {
 
 
 input[type="text"],
+input[type="number"],
 textarea {
     width: 100%;
     padding: 12px;
@@ -743,6 +810,24 @@ input[type="color"] {
     cursor: pointer;
 }
 
+.View-btn {
+    width: 100%;
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: var(--radius-md);
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.3s;
+}
+
+.View-btn:hover {
+    box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.3);
+    background: var(--primary-hover);
+}
+
 
 /* --- RESPONSIVE LOGIC --- */
 @media (max-width: 1025px) {
@@ -924,4 +1009,108 @@ input[type="color"] {
     border-top: 1px solid #f1f5f9;
     font-size: 0.85rem;
     color: var(--text-muted);
+}
+
+
+
+
+
+
+
+.edit-popup {
+  border-radius: 18px !important;
+  padding: 30px !important;
+}
+
+.edit-form .field {
+  margin-bottom: 16px;
+}
+
+.edit-form label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 6px;
+  display: block;
+}
+
+/* inputs */
+.edit-form input[type="text"],
+.edit-form textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  font-size: 14px;
+  outline: none;
+}
+
+.edit-form textarea {
+  resize: none;
+}
+
+/* file input */
+.file-input {
+  border: 2px dashed #4f46e5;
+  padding: 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  background: #fafafa;
+}
+
+/* checkbox FIX */
+.checkbox-field {
+  display: flex;
+  align-items: center;
+}
+
+.arrival-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.arrival-label input {
+  width: 16px;
+  height: 16px;
+}
+
+/* status */
+.status-wrap {
+  display: flex;
+  gap: 12px;
+}
+
+.status-box {
+  flex: 1;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.status-box input {
+  display: none;
+}
+
+.status-box:has(input:checked) {
+  border-color: #4f46e5;
+  background: #eef2ff;
+  color: #4f46e5;
+}
+
+/* buttons */
+.btn-confirm {
+  background: #4f46e5 !important;
+  padding: 10px 28px !important;
+  border-radius: 12px !important;
+}
+
+.btn-cancel {
+  border-radius: 12px !important;
 }

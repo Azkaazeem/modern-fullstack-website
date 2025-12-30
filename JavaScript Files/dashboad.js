@@ -90,8 +90,8 @@ function displayName(e) {
 
 fileInput && fileInput.addEventListener("click", displayName)
 
-async function UploadFile() {
-
+async function UploadFile(e) {
+e.preventDefault()
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) {
     return Swal.fire("Error", "Please login first!", "error");
@@ -103,13 +103,16 @@ async function UploadFile() {
 
   const prodDesc = document.getElementById("prodDesc").value.trim();
   // console.log(prodDesc);
+  const prodPrice = document.getElementById ("prodPrice").value.trim();
+  console.log(prodPrice);
+  
 
   const colorInputs = document.querySelectorAll(".color-input-field");
   const selectedColors = Array.from(colorInputs).map(input => input.value);
   // console.log(selectedColors);
-const selectedStatus = document.querySelector(
-  'input[name="prodStatus"]:checked'
-).value;
+  const selectedStatus = document.querySelector(
+    'input[name="prodStatus"]:checked'
+  ).value;
 
   // console.log(selectedStatus);
 
@@ -163,6 +166,7 @@ const selectedStatus = document.querySelector(
     if (uploadErr) throw uploadErr;
 
     const { data: pubData } = supabase.storage.from("FullStackImages").getPublicUrl(fileName);
+    const isNewArrival = document.getElementById("arrival-check").checked;
 
     const { error: dbErr } = await supabase.from("FullStack-Images").insert({
       image_url: pubData.publicUrl,
@@ -171,23 +175,33 @@ const selectedStatus = document.querySelector(
       product_description: prodDesc,
       product_colors: selectedColors,
       user_id: user.id,
-      status: selectedStatus
+      status: selectedStatus,
+      Arrival: isNewArrival,
+      product_price: prodPrice
     });
 
-    if (dbErr) throw dbErr;
-
-    Swal.fire("Success!", "Product Published!", "success");
-    fileInput.value = "";
+    if (dbErr) {
+      console.error("Insert Error:", dbErr.message);
+      Swal.fire("Error", dbErr.message, "error");
+    } else {
+      Swal.fire("Success", "Product added to Luxora!", "success");
+      fetchFile();
+      fileInput.value = "";
     title.value = "";
     Description.value = "";
-    selectedColors.values = "";
-    fetchFile();
+    prodPrice.value = "";
+    colorContainer.querySelectorAll(".color-item-wrapper").forEach(el => el.remove());
+    document.getElementById("arrival-check").checked = false;
+    }
+
 
   } catch (err) {
     Swal.fire("Error", err.message, "error");
-  }
 
+    fetchFile()
+  }
 }
+
 
 // if (uploadBtn) {
 //   uploadBtn.addEventListener("click", UploadFile);
@@ -232,64 +246,72 @@ async function fetchFile() {
   const cardContainer = document.getElementById('product-card-container');
   if (!cardContainer) return;
 
-  cardContainer.innerHTML = "";
+  cardContainer.innerHTML = "Loading...";
 
-  const { data: { user }, error: authError } = await supabase.auth.getUser();
+  // 1. Pata karein user kaun hai aur uska role kya hai
+  const { data: { user } } = await supabase.auth.getUser();
+  let userRole = "";
 
-  if (!user || authError) {
-    console.log("Session missing, skipping fetch.");
-    return;
+  if (user) {
+    const { data: profile } = await supabase
+      .from('FullStack-Users')
+      .select('role')
+      .eq('email', user.email)
+      .single();
+    if (profile) userRole = profile.role;
   }
 
-  const { data, error } = await supabase
-    .from('FullStack-Images')
-    .select('*')
-    .eq('user_id', user.id);
+  // 2. Pata karein page kaun sa hai?
+  const isDashboard = window.location.href.includes("dashboard.html");
 
-  if (error) {
-    console.error("Fetch error:", error.message);
-    cardContainer.innerHTML = `<p style="color:white;">Error loading cardContainer: ${error.message}</p>`;
-    return;
-  }
+  // 3. Database se products lein
+  const { data, error } = await supabase.from('FullStack-Images').select('*');
 
-  if (data && data.length > 0) {
-    data.forEach(item => {
-      console.log(item);
+  if (error) return console.error(error);
 
-      const statusText = item.status === "Active" ? "Active" : "Inactive";
-      const statusClass = item.status === "Active" ? "active" : "inactive";
+  cardContainer.innerHTML = ""; // Container saaf karein
 
-      cardContainer.innerHTML += `
-<div class="col-6 col-md-4 col-lg-3 d-flex align-items-stretch"> 
-    <div class="product-preview-card">
-      <div class="p-visual">
-        <div class="img-wrapper">
-            <img src="${item.image_url}" alt="${item.image_name}">
-        </div>
-        
+  data.forEach(item => {
+    // --- EASY LOGIC START ---
+    
+    // A: Tag tayyar karein (New Arrival ya Archive)
+    let tagText = item.Arrival ? "New Arrival" : "Archive";
+    let tagClass = item.Arrival ? "tag-new" : "tag-archive";
+
+    // B: Admin Buttons (Sirf tab dikhayen jab user Admin ho AUR Dashboard par ho)
+    let adminButtons = "";
+    if (userRole === "admin" && isDashboard) {
+      adminButtons = `
         <div class="p-admin-tools">
-          <button class="edit-tool" onclick="startEdit(${item.id}, '${item.image_url}')"><i class="fas fa-edit"></i></button>
+          <button class="edit-tool" onclick='startEdit(${item.id}, ${JSON.stringify(item)})'><i class="fas fa-edit"></i></button>
           <button class="del-tool" onclick="deleteImage(${item.id}, '${item.image_url}')"><i class="fas fa-trash"></i></button>
+        </div>`;
+    }
+
+    // --- CARD DRAW KAREIN ---
+    cardContainer.innerHTML += `
+      <div class="col-6 col-md-4 col-lg-3 d-flex align-items-stretch"> 
+        <div class="product-preview-card">
+          <div class="p-visual">
+            <div class="img-wrapper">
+                <img src="${item.image_url}" alt="${item.image_name}">
+            </div>
+            ${adminButtons} </div>
+          
+          <div class="p-details">
+            <span class="p-tag ${tagClass}">${tagText}</span>
+            <h4>${item.product_title}</h4>
+            <p>${item.product_description}</p>
+            <div style="text-align: right; color: red; font-weight: bold;">
+                Rs: ${Number(item.product_price)} </div>
+            <div class="p-footer-status">
+                Status: <b class="${item.status === 'Active' ? 'active' : 'inactive'}">${item.status}</b>
+            </div>
+            <button class="View-btn">View Details</button>
+          </div>
         </div>
-      </div>
-      
-      <div class="p-details">
-        <span class="p-tag">NEW ARRIVAL</span>
-        <h4>${item.product_title}</h4>
-        <p>${item.product_description}</p>
-        <div class="p-swatches">
-            <span style="background: #4f46e5;"></span>
-            <span style="background: #10b981;"></span>
-        </div>
-        <div class="p-footer-status">Status:<b class="${statusClass}">${statusText}</b></div>
-      </div>
-    </div>
-      </div>
-            `;
-    });
-  } else {
-    cardContainer.innerHTML = "<p style='color:white; text-align:center; grid-column: 1/-1;'>Your cardContainer is empty. Upload your first image!</p>";
-  }
+      </div>`;
+  });
 }
 
 if (uploadBtn) {
@@ -330,27 +352,72 @@ window.deleteImage = async (id, imageUrl) => {
   }
 };
 
-// ----------------------------------------------   D: EDIT FILE   ----------------------------------------------
+// // ----------------------------------------------   D: EDIT FILE   ----------------------------------------------
 let currentEditId = null;
 
-window.startEdit = async (id, oldTitle, oldDesc) => {
+window.startEdit = async (id, oldData) => {
   currentEditId = id;
 
-  // 1️⃣ Swal input modal
   const { value: formData } = await Swal.fire({
     title: "Edit Product",
+    width: 700,
+    showCancelButton: true,
+    confirmButtonText: "Update Product",
+    cancelButtonText: "Cancel",
+    customClass: {
+      popup: "edit-popup",
+      confirmButton: "btn-confirm",
+      cancelButton: "btn-cancel"
+    },
     html: `
-      <input id="swal-title" class="swal2-input" placeholder="Title" value="">
-      <textarea id="swal-desc" class="swal2-textarea" placeholder="Description"></textarea>
-      <input id="swal-file" type="file" class="swal2-file" accept="image/*">
-    `,
-    confirmButtonText: "Update",
-    focusConfirm: false,
+<div class="edit-form">
+
+  <div class="field">
+    <label>Product Image</label>
+    <input type="file" id="swal-file" class="file-input">
+  </div>
+
+  <div class="field checkbox-field">
+    <label class="arrival-label">
+      <input type="checkbox" id="swal-arrival">
+      <span>Mark as New Arrival</span>
+    </label>
+  </div>
+
+  <div class="field">
+    <label>Product Title</label>
+    <input type="text" id="swal-title" value="${oldData.product_title}">
+  </div>
+
+  <div class="field">
+    <label>Description</label>
+    <textarea id="swal-desc">${oldData.product_description}</textarea>
+  </div>
+
+  <div class="field">
+    <label>Product Status</label>
+    <div class="status-wrap">
+      <label class="status-box">
+        <input type="radio" name="swalStatus" value="Active" ${oldData.status === "Active" ? "checked" : ""}>
+        <span>Active</span>
+      </label>
+      <label class="status-box">
+        <input type="radio" name="swalStatus" value="Inactive" ${oldData.status === "Inactive" ? "checked" : ""}>
+        <span>Inactive</span>
+      </label>
+    </div>
+  </div>
+
+</div>
+`,
+
     preConfirm: () => {
       return {
         title: document.getElementById("swal-title").value.trim(),
         desc: document.getElementById("swal-desc").value.trim(),
-        file: document.getElementById("swal-file").files[0]
+        file: document.getElementById("swal-file").files[0],
+        arrival: document.getElementById("swal-arrival").checked,
+        status: document.querySelector('input[name="swalStatus"]:checked').value
       };
     }
   });
@@ -360,40 +427,25 @@ window.startEdit = async (id, oldTitle, oldDesc) => {
   Swal.fire({ title: "Updating...", didOpen: () => Swal.showLoading() });
 
   try {
-    let imageUrl = null;
-    let imageName = null;
+    let imageUrl = oldData.image_url;
+    let imageName = oldData.image_name;
 
-    // 2️⃣ Image upload (optional)
     if (formData.file) {
       const fileName = `${Date.now()}_${formData.file.name}`;
-
-      await supabase.storage
-        .from("FullStackImages")
-        .upload(fileName, formData.file);
-
-      const { data } = supabase.storage
-        .from("FullStackImages")
-        .getPublicUrl(fileName);
-
+      await supabase.storage.from("FullStackImages").upload(fileName, formData.file);
+      const { data } = supabase.storage.from("FullStackImages").getPublicUrl(fileName);
       imageUrl = data.publicUrl;
       imageName = formData.file.name;
     }
 
-    // 3️⃣ DB update
-    const updateData = {
+    await supabase.from("FullStack-Images").update({
       product_title: formData.title,
-      product_description: formData.desc
-    };
-
-    if (imageUrl) {
-      updateData.image_url = imageUrl;
-      updateData.image_name = imageName;
-    }
-
-    await supabase
-      .from("FullStack-Images")
-      .update(updateData)
-      .eq("id", currentEditId);
+      product_description: formData.desc,
+      image_url: imageUrl,
+      image_name: imageName,
+      Arrival: formData.arrival,
+      status: formData.status
+    }).eq("id", currentEditId);
 
     Swal.fire("Updated!", "Product updated successfully", "success");
     fetchFile();
