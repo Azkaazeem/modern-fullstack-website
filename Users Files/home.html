@@ -6,70 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Luxora | Premium Living</title>
     <link rel="shortcut icon" href="../Images/logo.png" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="user.css">
 </head>
 
 <body>
 
-    <nav class="nav">
-        <div class="nav-wrap">
-            <input type="checkbox" id="menu-toggle" hidden>
-
-            <label for="menu-toggle" class="hamburger">
-                <i class="fa-solid fa-bars-staggered"></i>
-            </label>
-
-            <div class="brand">Luxora</div>
-
-            <div class="nav-links">
-                <label for="menu-toggle" class="close-drawer">
-                    <i class="fa-solid fa-xmark"></i>
-                </label>
-
-                <div class="drawer-header">
-                    <div class="user-avatar"><i class="fa-solid fa-circle-user"></i></div>
-                    <div class="user-info">
-                        <span>Welcome back,</span>
-                    </div>
-                </div>
-
-                <ul class="menu-list">
-                    <li><a href="home.html"><i class="fa-solid fa-house"></i> Home</a></li>
-                    <li><a href="products.html"><i class="fa-solid fa-bag-shopping"></i> Shop All</a></li>
-                    <li><a href="newproduct.html"><i class="fa-solid fa-bolt"></i> New Arrivals</a></li>
-                    <li><a href="wishlist.html"><i class="fa-solid fa-heart"></i> Wishlist</a></li>
-                    <hr class="mobile-only">
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="contact.html">Contact & Support</a></li>
-                </ul>
-
-                <div class="drawer-footer mobile-only">
-                    <p>Follow Luxora</p>
-                    <div class="social-icons">
-                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="#"><i class="fa-brands fa-tiktok"></i></a>
-                        <a href="#"><i class="fa-brands fa-pinterest-p"></i></a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="user-action">
-                <button id="LogoutBtn" title="Logout">
-                    <i class="fa-solid fa-right-from-bracket"></i>
-                </button>
-            </div>
-        </div>
+    <nav class="nav luxora-nav">
     </nav>
+
+    <label for="menu-toggle" class="nav-overlay"></label>
 
     <label for="menu-toggle" class="nav-overlay"></label>
 
     <header class="hero">
         <div class="hero-text">
             <h1>Premium Products <br />For Modern Living</h1>
-            <p>Discover stylish, high‑quality products curated for modern lifestyles. Clean design, trusted quality.</p>
+            <p>Discover stylish, high‑quality products curated for modern lifestyles. Clean design, trusted quality.
+            </p>
             <a href="newproduct.html"><button class="btn">Explore Collection</button></a>
         </div>
         <div class="hero-card">
@@ -117,9 +76,10 @@
 
     <footer>© 2025 Luxora Store. All rights reserved.</footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script type="module" src="./user.js"></script>
     <script type="module" src="../JavaScript Files/config.js"></script>
-    <script type="module" src="../JavaScript Files/dashboad.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
+
 </html>

@@ -33,30 +33,27 @@ LogoutBtn && LogoutBtn.addEventListener("click", logout)
 // B: Is User Authenticated Or not?
 
 async function protectDashboard() {
-  // 1. Check karein session hai ya nahi
   const { data: { user }, error: authError } = await supabase.auth.getUser();
 
   if (authError || !user) {
-    console.log("Session missing, redirecting...");
-    window.location.href = "./login/login.html";
+    if (!window.location.href.includes("login.html")) {
+        window.location.href = "../login/login.html";
+    }
     return;
   }
 
-  // 2. Query karein (Small letters aur email filter ke saath)
-  const { data: userData, error: dbError } = await supabase
+  const { data: userData } = await supabase
     .from('FullStack-Users')
-    .select('role, email') // Casing check: 'role' not 'Role'
-    .eq('email', user.email) // Type mismatch se bachne ke liye email use karein
+    .select('role')
+    .eq('email', user.email)
     .single();
 
-  if (dbError) {
-    console.error("fetch.ts error ki wajah:", dbError.message);
-    return;
-  }
+  if (!userData) return;
 
-  // Admin check
-  if (userData.role !== 'admin') {
-    window.location.href = "../Users Files/home.html";
+  const isDashboardPage = window.location.href.includes("dashboard.html");
+
+  if (userData.role !== 'admin' && isDashboardPage) {
+    window.location.href = "./Users Files/home.html";
   }
 }
 
@@ -98,18 +95,20 @@ e.preventDefault()
   }
 
   const file = fileInput.files[0];
-  const prodTitle = document.getElementById("prodTitle").value.trim();
+  const prodTitle = document.getElementById("prodTitle").value;
   // console.log(prodTitle);
 
-  const prodDesc = document.getElementById("prodDesc").value.trim();
+  const prodDesc = document.getElementById("prodDesc").value;
   // console.log(prodDesc);
-  const prodPrice = document.getElementById ("prodPrice").value.trim();
-  console.log(prodPrice);
+
+  const prodPrice = document.getElementById ("prodPrice").value;
+  // console.log(prodPrice);
   
 
   const colorInputs = document.querySelectorAll(".color-input-field");
   const selectedColors = Array.from(colorInputs).map(input => input.value);
   // console.log(selectedColors);
+
   const selectedStatus = document.querySelector(
     'input[name="prodStatus"]:checked'
   ).value;
@@ -189,7 +188,6 @@ e.preventDefault()
       fileInput.value = "";
     title.value = "";
     Description.value = "";
-    prodPrice.value = "";
     colorContainer.querySelectorAll(".color-item-wrapper").forEach(el => el.remove());
     document.getElementById("arrival-check").checked = false;
     }
@@ -248,7 +246,6 @@ async function fetchFile() {
 
   cardContainer.innerHTML = "Loading...";
 
-  // 1. Pata karein user kaun hai aur uska role kya hai
   const { data: { user } } = await supabase.auth.getUser();
   let userRole = "";
 
@@ -261,20 +258,16 @@ async function fetchFile() {
     if (profile) userRole = profile.role;
   }
 
-  // 2. Pata karein page kaun sa hai?
   const isDashboard = window.location.href.includes("dashboard.html");
 
-  // 3. Database se products lein
   const { data, error } = await supabase.from('FullStack-Images').select('*');
 
   if (error) return console.error(error);
 
-  cardContainer.innerHTML = ""; // Container saaf karein
+  cardContainer.innerHTML = "";
 
   data.forEach(item => {
-    // --- EASY LOGIC START ---
     
-    // A: Tag tayyar karein (New Arrival ya Archive)
     let tagText = item.Arrival ? "New Arrival" : "Archive";
     let tagClass = item.Arrival ? "tag-new" : "tag-archive";
 
@@ -307,7 +300,10 @@ async function fetchFile() {
             <div class="p-footer-status">
                 Status: <b class="${item.status === 'Active' ? 'active' : 'inactive'}">${item.status}</b>
             </div>
-            <button class="View-btn">View Details</button>
+            <button class="View-btn" onclick="window.location.href='../Users Files/detail.html?id=${item.id}'">
+    View Details
+</button>
+
           </div>
         </div>
       </div>`;
