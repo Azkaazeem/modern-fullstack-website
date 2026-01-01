@@ -2,7 +2,7 @@ import supabase from "../JavaScript Files/config.js";
 
 // ================================================================   Login Page Functionality   ================================================================
 
-    //  ---------------   A: Get Input IDs   ---------------
+//  ---------------   A: Get Input IDs   ---------------
 
 let lEmail = document.getElementById("email");
 let lPass = document.getElementById("password");
@@ -29,7 +29,7 @@ function toggleIcon() {
 
 togglePass && togglePass.addEventListener("click", toggleIcon)
 
-    //  ---------------   C: Form functionality   ---------------
+//  ---------------   C: Form functionality   ---------------
 
 async function login(e) {
     e.preventDefault();
@@ -147,8 +147,8 @@ async function login(e) {
             .eq('email', email)
             .single();
 
-            console.log(userData);
-            
+        console.log(userData);
+
         if (dbError) throw dbError;
 
         // 8: If role Equal to Admin Gona Dashboard
@@ -163,7 +163,7 @@ async function login(e) {
                 location.href = "../dashboard.html";
             });
 
-        // 9: else Gona Home
+            // 9: else Gona Home
 
         } else {
             Swal.fire({
@@ -176,7 +176,7 @@ async function login(e) {
             });
         }
 
-    //  ---------------   D: System Error Swal   ---------------
+        //  ---------------   D: System Error Swal   ---------------
 
     } catch (err) {
         console.error("Login Error:", err);

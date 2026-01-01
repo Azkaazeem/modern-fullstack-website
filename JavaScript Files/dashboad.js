@@ -37,7 +37,7 @@ async function protectDashboard() {
 
   if (authError || !user) {
     if (!window.location.href.includes("login.html")) {
-        window.location.href = "../login/login.html";
+      window.location.href = "../login/login.html";
     }
     return;
   }
@@ -88,7 +88,7 @@ function displayName(e) {
 fileInput && fileInput.addEventListener("click", displayName)
 
 async function UploadFile(e) {
-e.preventDefault()
+  e.preventDefault()
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) {
     return Swal.fire("Error", "Please login first!", "error");
@@ -101,9 +101,9 @@ e.preventDefault()
   const prodDesc = document.getElementById("prodDesc").value;
   // console.log(prodDesc);
 
-  const prodPrice = document.getElementById ("prodPrice").value;
+  const prodPrice = document.getElementById("prodPrice").value;
   // console.log(prodPrice);
-  
+
 
   const colorInputs = document.querySelectorAll(".color-input-field");
   const selectedColors = Array.from(colorInputs).map(input => input.value);
@@ -186,10 +186,10 @@ e.preventDefault()
       Swal.fire("Success", "Product added to Luxora!", "success");
       fetchFile();
       fileInput.value = "";
-    title.value = "";
-    Description.value = "";
-    colorContainer.querySelectorAll(".color-item-wrapper").forEach(el => el.remove());
-    document.getElementById("arrival-check").checked = false;
+      title.value = "";
+      Description.value = "";
+      colorContainer.querySelectorAll(".color-item-wrapper").forEach(el => el.remove());
+      document.getElementById("arrival-check").checked = false;
     }
 
 
@@ -267,11 +267,10 @@ async function fetchFile() {
   cardContainer.innerHTML = "";
 
   data.forEach(item => {
-    
+
     let tagText = item.Arrival ? "New Arrival" : "Archive";
     let tagClass = item.Arrival ? "tag-new" : "tag-archive";
 
-    // B: Admin Buttons (Sirf tab dikhayen jab user Admin ho AUR Dashboard par ho)
     let adminButtons = "";
     if (userRole === "admin" && isDashboard) {
       adminButtons = `
@@ -281,9 +280,8 @@ async function fetchFile() {
         </div>`;
     }
 
-    // --- CARD DRAW KAREIN ---
     cardContainer.innerHTML += `
-      <div class="col-6 col-md-4 col-lg-2 align-items-stretch"> 
+      <div class="col-6 col-md-3 col-lg-2 align-items-stretch"> 
         <div class="product-preview-card">
           <div class="p-visual">
             <div class="img-wrapper">
@@ -300,7 +298,7 @@ async function fetchFile() {
             <div class="p-footer-status">
                 Status: <b class="${item.status === 'Active' ? 'active' : 'inactive'}">${item.status}</b>
             </div>
-            <button class="View-btn" onclick="window.location.href='../Users Files/detail.html?id=${item.id}'">
+            <button class="View-btn" onclick="window.location.href='../Users Files/index.html?id=${item.id}'">
     View Details
 </button>
 

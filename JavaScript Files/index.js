@@ -2,7 +2,7 @@ import supabase from "./config.js";
 
 // ================================================================   SignUp Page Functionality   ================================================================
 
-    //  ---------------   A: Get Input IDs   ---------------
+//  ---------------   A: Get Input IDs   ---------------
 
 
 let sUName = document.getElementById("name");
@@ -36,7 +36,7 @@ togglePass && togglePass.addEventListener("click", () => {
 })
 
 
-    //  ---------------   C: Form functionality   ---------------
+//  ---------------   C: Form functionality   ---------------
 
 async function signUp(e) {
     e.preventDefault();
@@ -132,7 +132,7 @@ async function signUp(e) {
 
     try {
 
-    //   6: Fetch Data from Supabase functionality
+        //   6: Fetch Data from Supabase functionality
 
         const { data, error } = await supabase.auth.signUp(
             {
@@ -148,7 +148,7 @@ async function signUp(e) {
         )
         console.log(data);
 
-    //   7: If Error Display functionality
+        //   7: If Error Display functionality
 
         if (error) {
             console.log(error);
@@ -175,7 +175,7 @@ async function signUp(e) {
             })
             return;
 
-    //   8: Else Data SuccessFul Store functionality
+            //   8: Else Data SuccessFul Store functionality
 
         } else {
             Swal.fire({
@@ -195,7 +195,7 @@ async function signUp(e) {
 
             }).then(
 
-   //  ---------------   D: Inserting Data in table   ---------------
+                //  ---------------   D: Inserting Data in table   ---------------
 
                 async () => {
                     const { error } = await supabase
@@ -221,7 +221,7 @@ async function signUp(e) {
     } catch (error) {
 
 
-    //  ---------------   E: System Error Swal   ---------------
+        //  ---------------   E: System Error Swal   ---------------
 
         console.log(err)
         Swal.fire({

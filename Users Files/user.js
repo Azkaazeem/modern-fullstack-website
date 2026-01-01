@@ -298,7 +298,7 @@ function updateCartUI(count) {
 }
 
 window.addToCart = async (product) => {
-    const key = await getCartKey(); 
+    const key = await getCartKey();
     let cart = JSON.parse(localStorage.getItem(key) || "[]");
 
     let exist = cart.find((item) => item.id === product.id);
@@ -316,9 +316,9 @@ window.addToCart = async (product) => {
     }
 
     localStorage.setItem(key, JSON.stringify(cart));
-    updateCartUI(cart.length); 
+    updateCartUI(cart.length);
     Swal.fire("Success", "Added to bag", "success");
-    renderCart(); 
+    renderCart();
 };
 
 async function renderCart() {
