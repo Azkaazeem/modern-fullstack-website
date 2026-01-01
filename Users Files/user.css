@@ -966,8 +966,7 @@
 
  .products-grid {
    display: grid;
-   grid-template-columns: repeat(1, 1fr);
-   ;
+    grid-template-columns: repeat(1, 1fr);
    gap: 25px;
  }
 
@@ -1270,3 +1269,124 @@
      flex-direction: column;
    }
  }
+
+
+ /* ================= LUXORA PREMIUM CART STYLING ================= */
+
+.cart-item {
+    padding: 16px;
+    margin: 10px 15px;
+    background: #ffffff;
+    border: 1px solid #f1f5f9;
+    border-radius: var(--radius-md); /* Consistent rounding */
+    display: grid;
+    grid-template-columns: 80px 1fr auto; /* Better layout grid */
+    gap: 15px;
+    align-items: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cart-item:hover {
+    border-color: var(--primary);
+    box-shadow: 0 10px 20px rgba(79, 70, 229, 0.08);
+    transform: translateX(5px); /* Choti si movement */
+}
+
+/* Image with a soft glow */
+.cart-item-img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 12px;
+    background: #f8fafc;
+}
+
+/* Text Hierarchy */
+.cart-item-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.cart-item-title {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--text-main);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 150px;
+}
+
+.cart-item-price {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+}
+
+/* Sleek Quantity Pill */
+.quantity-pill {
+    display: flex;
+    align-items: center;
+    background: #f1f5f9;
+    border-radius: 50px;
+    padding: 2px;
+    width: fit-content;
+}
+
+.qty-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: none;
+    background: #fff;
+    color: var(--primary);
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    transition: 0.2s;
+}
+
+.qty-btn:hover {
+    background: var(--primary);
+    color: white;
+}
+
+.qty-number {
+    font-weight: 700;
+    padding: 0 12px;
+    font-size: 0.9rem;
+    color: var(--text-main);
+}
+
+/* Pricing and Remove Action */
+.cart-action-group {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.cart-item-total {
+    font-weight: 800;
+    font-size: 1rem;
+    color: var(--primary);
+}
+
+.remove-item-btn {
+    background: none;
+    border: none;
+    color: #cbd5e1;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: 0.2s;
+    margin-top: auto;
+}
+
+.remove-item-btn:hover {
+    color: #ef4444; /* Alert Red on hover */
+}

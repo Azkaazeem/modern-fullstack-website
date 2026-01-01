@@ -283,7 +283,7 @@ async function fetchFile() {
 
     // --- CARD DRAW KAREIN ---
     cardContainer.innerHTML += `
-      <div class="col-6 col-md-4 col-lg-3 d-flex align-items-stretch"> 
+      <div class="col-6 col-md-4 col-lg-2 align-items-stretch"> 
         <div class="product-preview-card">
           <div class="p-visual">
             <div class="img-wrapper">
