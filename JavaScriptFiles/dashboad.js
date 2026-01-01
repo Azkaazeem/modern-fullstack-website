@@ -298,7 +298,7 @@ async function fetchFile() {
             <div class="p-footer-status">
                 Status: <b class="${item.status === 'Active' ? 'active' : 'inactive'}">${item.status}</b>
             </div>
-            <button class="View-btn" onclick="window.location.href='../UsersFiles/index.html?id=${item.id}'">
+            <button class="View-btn" onclick="window.location.href='../UsersFiles/detail.html?id=${item.id}'">
     View Details
 </button>
 
