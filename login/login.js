@@ -1,4 +1,4 @@
-import supabase from "../JavaScript Files/config.js";
+import supabase from "../JavaScriptFiles/config.js";
 
 // ================================================================   Login Page Functionality   ================================================================
 
@@ -172,7 +172,7 @@ async function login(e) {
                 icon: "success",
                 confirmButtonColor: "#4f46e5"
             }).then(() => {
-                location.href = "../Users Files/home.html";
+                location.href = "../UsersFiles/home.html";
             });
         }
 

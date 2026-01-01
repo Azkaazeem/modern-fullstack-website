@@ -1,4 +1,4 @@
-import supabase from "../JavaScript Files/config.js";
+import supabase from "../JavaScriptFiles/config.js";
 
 
 
