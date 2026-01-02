@@ -70,7 +70,7 @@ navbar.innerHTML = `
                     <span>Subtotal</span>
                     <span id="cart-total">Rs: 0</span>
                 </div>
-                <button class="btn-checkout">Proceed to Checkout</button>
+                <button class="btn-checkout" id= "checkOutBtn">Proceed to Checkout</button>
             </div>
         </div>
 
@@ -186,6 +186,8 @@ let productCard = document.getElementById("productContainer");
 // console.log(productCard);
 
 async function ProductRender(e) {
+    if (!productId) return;
+
     try {
         const { data, error } = await supabase
             .from("FullStack-Images")
@@ -398,3 +400,170 @@ window.updateQty = async (index, operand) => {
     loadCartOnRefresh(); // Badge refresh karein
 };
 
+ 
+// ================================================================   Checkout Functionality   ================================================================
+
+// const { data: { user } } = await supabase.auth.getUser();
+
+// if (user) {
+//     const nameInput = document.getElementById("c-name");
+//     const phoneInput = document.getElementById("c-phone");
+
+//     if (nameInput && phoneInput) {
+//         const { data: profile } = await supabase
+//             .from('FullStack-Users')
+//             .select('*')
+//             .eq('email', user.email)
+//             .single();
+        
+//         if (profile) {
+//             nameInput.value = profile.username || "";
+//             phoneInput.value = profile.phone || "";
+//         }
+//     }
+// }
+// // ==================== CHECKOUT BUTTON (Redirect to Page) ====================
+// let checkOutBtn = document.getElementById('checkOutBtn');
+// if (checkOutBtn) {
+//     checkOutBtn.addEventListener("click", () => {
+//         window.location.href = "checkout.html";
+//     });
+// }
+
+// // ==================== CHECKOUT PAGE LOGIC ====================
+// const itemsContainer = document.getElementById("checkout-items-container");
+// const subtotalEl = document.getElementById("summary-subtotal");
+// const totalPriceEl = document.getElementById("summary-total-price");
+// const itemsCountLabel = document.getElementById("items-count-label");
+// const pkgHeader = document.getElementById("pkg-header");
+// const placeOrderBtn = document.getElementById("placeOrderBtn");
+// const DELIVERY_FEE = 140;
+
+// // --- 1. Load Cart on Checkout Page ---
+// async function loadCheckout() {
+//     // Sirf tab chalein agar hum checkout page par hon
+//     if (!itemsContainer) return;
+
+//     const { data: { user } } = await supabase.auth.getUser();
+//     const key = user ? `cart_${user.id}` : "cart_guest";
+//     const cart = JSON.parse(localStorage.getItem(key) || "[]");
+
+//     if (cart.length === 0) {
+//         Swal.fire({
+//             title: "Cart is Empty",
+//             text: "Please add products first",
+//             icon: "warning",
+//             confirmButtonColor: "#4f46e5"
+//         }).then(() => {
+//             window.location.href = "products.html";
+//         });
+//         return;
+//     }
+
+//     // Calculations
+//     let subtotal = 0;
+//     let totalItems = 0;
+//     itemsContainer.innerHTML = "";
+
+//     cart.forEach(item => {
+//         subtotal += item.product_price * item.quantity;
+//         totalItems += item.quantity;
+
+//         // HTML Render
+//         itemsContainer.innerHTML += `
+//             <div class="package-item">
+//                 <img src="${item.image_url}" class="pkg-img" alt="Product">
+//                 <div class="pkg-info" style="flex: 1;">
+//                     <h4>${item.product_title}</h4>
+//                     <p>No Brand, Color: Standard</p>
+//                 </div>
+//                 <div style="text-align: right;">
+//                     <div class="pkg-price">Rs. ${item.product_price}</div>
+//                     <div style="font-size: 12px; color: #888; margin-top: 5px;">Qty: ${item.quantity}</div>
+//                 </div>
+//             </div>
+//         `;
+//     });
+
+//     itemsCountLabel.innerText = `Items Total (${totalItems} items)`;
+//     pkgHeader.innerText = `Package 1 of ${cart.length}`;
+//     subtotalEl.innerText = `Rs. ${subtotal}`;
+//     totalPriceEl.innerText = `Rs. ${subtotal + DELIVERY_FEE}`;
+// }
+
+// // --- 2. PLACE ORDER (REAL DATABASE SAVE) ---
+// if (placeOrderBtn) {
+//     placeOrderBtn.addEventListener("click", async (e) => {
+//         e.preventDefault();
+
+//         // A. Form Values Get Karein
+//         const name = document.getElementById("c-name").value.trim();
+//         const phone = document.getElementById("c-phone").value.trim();
+//         const city = document.getElementById("c-city").value.trim();
+//         const address = document.getElementById("c-address").value.trim();
+//         const province = document.getElementById("c-province").value;
+
+//         // B. Validation
+//         if (!name || !phone || !city || !address) {
+//             Swal.fire("Missing Info", "Please fill all delivery details.", "warning");
+//             return;
+//         }
+
+//         // C. Loading Start
+//         Swal.fire({
+//             title: 'Processing Order...',
+//             text: 'Saving to database',
+//             allowOutsideClick: false,
+//             didOpen: () => Swal.showLoading()
+//         });
+
+//         try {
+//             // D. Data Prepare Karein
+//             const { data: { user } } = await supabase.auth.getUser();
+//             const key = user ? `cart_${user.id}` : "cart_guest";
+//             const cart = JSON.parse(localStorage.getItem(key) || "[]");
+
+//             if (cart.length === 0) return;
+
+//             let totalAmount = 0;
+//             cart.forEach(item => totalAmount += (item.product_price * item.quantity));
+//             const finalBill = totalAmount + DELIVERY_FEE;
+
+//             // E. SUPABASE INSERT (Yeh asal kaam hai)
+//             const { error } = await supabase
+//                 .from('orders') // <--- Table Name Match Karein
+//                 .insert({
+//                     user_id: user ? user.id : null,
+//                     customer_name: name,
+//                     phone: phone,
+//                     address: address,
+//                     city: city,
+//                     province: province, // Database mein ye column hona chahiye
+//                     items: cart,
+//                     total_amount: finalBill
+//                 });
+
+//             if (error) throw error;
+
+//             // F. Success: Clear Cart & Redirect
+//             localStorage.removeItem(key);
+//                 Swal (close)
+//             await Swal.fire({
+//                 title: "Order Placed!",
+//                 text: `Your order has been saved! Total: Rs ${finalBill}`,
+//                 icon: "success",
+//                 confirmButtonColor: "#4f46e5"
+//             });
+
+//             window.location.href = "home.html";
+
+//         } catch (err) {
+//             console.error("Order Error:", err);
+//             Swal(close)
+//             Swal.fire("Order Failed", err.message, "error");
+//         }
+//     });
+// }
+
+// // Run Load Logic
+// document.addEventListener("DOMContentLoaded", loadCheckout);
