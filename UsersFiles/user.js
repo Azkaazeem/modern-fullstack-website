@@ -403,41 +403,102 @@ window.updateQty = async (index, operand) => {
  
 // ================================================================   Checkout Functionality   ================================================================
 
-// const { data: { user } } = await supabase.auth.getUser();
 
-// if (user) {
-//     const nameInput = document.getElementById("c-name");
-//     const phoneInput = document.getElementById("c-phone");
+// ==================== CHECKOUT BUTTON (Redirect to Page) ====================
 
-//     if (nameInput && phoneInput) {
-//         const { data: profile } = await supabase
-//             .from('FullStack-Users')
-//             .select('*')
-//             .eq('email', user.email)
-//             .single();
-        
-//         if (profile) {
-//             nameInput.value = profile.username || "";
-//             phoneInput.value = profile.phone || "";
-//         }
-//     }
-// }
-// // ==================== CHECKOUT BUTTON (Redirect to Page) ====================
-// let checkOutBtn = document.getElementById('checkOutBtn');
-// if (checkOutBtn) {
-//     checkOutBtn.addEventListener("click", () => {
-//         window.location.href = "checkout.html";
-//     });
-// }
+let checkOutBtn = document.getElementById('checkOutBtn');
+if (checkOutBtn) {
+    checkOutBtn.addEventListener("click", () => {
+        window.location.href = "checkout.html";
+    });
+}
+
 
 // // ==================== CHECKOUT PAGE LOGIC ====================
-// const itemsContainer = document.getElementById("checkout-items-container");
-// const subtotalEl = document.getElementById("summary-subtotal");
-// const totalPriceEl = document.getElementById("summary-total-price");
-// const itemsCountLabel = document.getElementById("items-count-label");
-// const pkgHeader = document.getElementById("pkg-header");
-// const placeOrderBtn = document.getElementById("placeOrderBtn");
-// const DELIVERY_FEE = 140;
+const itemsContainer = document.getElementById("checkout-items-container");
+// console.log(itemsContainer);
+
+const subtotalEl = document.getElementById("summary-subtotal");
+// console.log(subtotalEl);
+
+const totalPriceEl = document.getElementById("summary-total-price");
+// console.log(totalPriceEl);
+
+const itemsCountLabel = document.getElementById("items-count-label");
+// console.log(itemsCountLabel);
+
+const pkgHeader = document.getElementById("pkg-header");
+// console.log(pkgHeader);
+
+const placeOrderBtn = document.getElementById("placeOrderBtn");
+// console.log(placeOrderBtn);
+
+const DELIVERY_FEE = 140;
+// console.log(DELIVERY_FEE);
+
+
+let SubTotal = document.getElementById ("cart-total");
+console.log(SubTotal);
+
+let totalPrice = SubTotal.innerText[4];
+console.log(totalPrice);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // // --- 1. Load Cart on Checkout Page ---
 // async function loadCheckout() {
